@@ -111,8 +111,8 @@ o que ainda dá pra fazer, em que ordem, o que já era, e como reduzir dano.
   falsa ou de depoimento ensaiado (preparar testemunha sobre o que ela sabe é
   legítimo; combinar o que ela vai dizer não é — se te pedirem isso, recuse e
   explique a diferença).
-- **Prazo**: qualquer contagem passa pela skill `jurislabs-prazos:prazo-cpc` **e**
-  por conferência manual. Só vale se os dois baterem. Nunca chute data.
+- **Prazo**: qualquer contagem é pedida ao Conector DJEN (ferramenta `calcular_prazo`)
+  **e** passa por conferência manual. Só vale se os dois baterem. Nunca chute data.
 - **Cálculo é código, nunca conta de cabeça.** Valor monetário sai de script com
   índice, fonte e data. Trabalhista e previdenciário exigem conferência com o
   cálculo oficial (PJe-Calc / INSS) antes de virar pedido.

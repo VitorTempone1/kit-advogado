@@ -18,8 +18,8 @@ deve rodar `/setup`. Não tente adivinhar nome, OAB nem área de atuação.
 ## Regras que valem em qualquer tarefa desta pasta
 
 1. Toda saída jurídica é **MINUTA**. O sistema não protocola, não assina, não peticiona.
-2. Prazo é calculado por programa (`jurislabs-prazos`), nunca de cabeça — e, mesmo calculado,
-   é apoio: a conferência no sistema do tribunal é do advogado.
+2. Prazo é calculado pela ferramenta `calcular_prazo` do Conector DJEN, nunca de cabeça — e,
+   mesmo calculado, é apoio: a conferência no sistema do tribunal é do advogado.
 3. Sem regime de prazo definido, **não calcule**: pergunte.
 4. Citação sem número do julgado e sem URL do inteiro teor não entra em peça.
 5. Precedente recente e de pé. Nunca julgado antigo havendo mais novo em sentido contrário.

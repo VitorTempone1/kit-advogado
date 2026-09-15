@@ -162,7 +162,7 @@ Múltipla escolha. Enunciado: "E alguma dessas também? Se nenhuma, escolha *Out
 | Empresarial e Societário | Contrato entre empresas, societário, recuperação |
 | Imobiliário | Despejo, locação, usucapião, compra e venda, condomínio |
 
-**Guarde também o regime**, que é o que o motor de prazo vai ler:
+**Guarde também o regime**, que é o que o Conector DJEN vai ler no cálculo de prazo:
 
 | Área marcada | Regime que o perfil registra |
 |---|---|

@@ -44,8 +44,8 @@ verde de aceite.
 ### 3. Assinatura do Conector DJEN
 
 **Sem isso, metade do kit não funciona.** As skills que leem intimação do Diário, que consultam
-processo e que buscam legislação dependem do **Conector DJEN**, que é um serviço pago da
-JurisLabs, cobrado por OAB.
+processo, que buscam legislação e que **calculam prazo** dependem do **Conector DJEN**, que é um
+serviço pago da JurisLabs, cobrado por OAB.
 
 **Se você é da mentoria, o acesso é incluso** — o mentor gera o seu e te entrega um endereço
 que termina com uma sequência de letras e números. Esse endereço é a sua chave: **é pessoal, não
@@ -55,8 +55,8 @@ O que funciona **sem** o Conector: organizar a pasta do cliente, manter o briefi
 PDF de processo e montar a linha do tempo, redigir e revisar minuta, os três advogados de IA
 raciocinando em cima do que você já tem.
 
-O que **não** funciona sem ele: buscar intimação nova no Diário, consultar andamento de processo
-e puxar texto de lei. As skills avisam em uma frase quando faltar — elas não quebram e não
+O que **não** funciona sem ele: buscar intimação nova no Diário, consultar andamento de processo,
+puxar texto de lei e **calcular prazo**. As skills avisam em uma frase quando faltar — elas não quebram e não
 inventam o que não conseguiram buscar.
 
 ### 4. Git e GitHub CLI
@@ -358,59 +358,11 @@ de texto esperando. **Você chegou.**
 > dos seus clientes ficam em outra pasta, e o sistema sabe chegar lá sozinho — você não precisa
 > abrir o Claude lá dentro.
 
-## Passo 11. Instale o motor de prazo
+## Passo 11. Ligue o Conector DJEN
 
-O cálculo de prazo **não** vem no kit, e isso é de propósito: ele é um programa de verdade, com
-os calendários de feriado de cada tribunal, e precisa se atualizar sozinho quando um tribunal
-publica portaria nova. Por isso ele chega separado, e se mantém sozinho.
-
-Dentro do Claude, digite e aperte **Enter**:
-
-```
-/plugin marketplace add VitorTempone1/jurislabs-plugins
-```
-
-**O que você vai ver:** uma mensagem confirmando que o marketplace `jurislabs` foi adicionado.
-
-Depois:
-
-```
-/plugin install jurislabs-prazos@jurislabs
-```
-
-E, pra ele ficar disponível na hora:
-
-```
-/reload-plugins
-```
-
-**O que você vai ver:** confirmação de que os plugins foram recarregados.
-
-## Passo 12. LIGUE O AUTO-UPDATE (não pule este passo)
-
-**É o passo mais importante depois da instalação.**
-
-Marketplaces que não são da Anthropic vêm com atualização automática **desligada** por padrão.
-Quando um tribunal muda o calendário de feriado, a correção sai por aqui. Sem este passo, você
-**não recebe** — e não fica sabendo que não recebeu.
-
-1. Digite `/plugin` e aperte **Enter**.
-
-   **O que você vai ver:** um menu com abas no topo, entre elas **Discover**, **Installed**,
-   **Marketplaces** e **Errors**.
-
-2. Use as setas do teclado até a aba **Marketplaces** e aperte **Enter**.
-
-3. Selecione **jurislabs** e aperte **Enter**.
-
-4. Selecione **"Enable auto-update"** e aperte **Enter**.
-
-   **O que você vai ver:** a opção vira **"Disable auto-update"**. Parece contraditório e não é:
-   ela agora oferece *desligar*, porque já está **ligado**. É essa a confirmação.
-
-5. Aperte **Esc** para sair do menu.
-
-## Passo 13. Ligue o Conector DJEN
+O cálculo de prazo **não** vem no kit, e isso é de propósito: ele mora no Conector DJEN, junto
+com os calendários de feriado dos 27 tribunais. Fica no servidor da JurisLabs, sempre atual —
+você não instala nem atualiza nada. É este passo que liga tudo.
 
 O mentor te passou um endereço que começa com `https://` e termina com uma sequência de letras
 e números. **Saia do Claude** digitando `/exit` e aperte **Enter**.
@@ -444,7 +396,7 @@ ferramentas**.
 **Se aparecer com menos de 5 ferramentas ou como failed:** veja **"Quando o Conector muda"**,
 no fim deste documento.
 
-## Passo 14. Configure o kit pro seu escritório
+## Passo 12. Configure o kit pro seu escritório
 
 Dentro do Claude, digite e aperte **Enter**:
 
@@ -478,26 +430,6 @@ git pull
 **O que você vai ver:** ou `Already up to date.` (você já está na última versão), ou uma lista
 de arquivos atualizados.
 
-## Uma vez por mês: confira o motor de prazo
-
-O motor de prazo se atualiza sozinho em segundo plano — **quase sempre**. Ele mora num
-repositório fechado, e a atualização automática de repositório fechado pode falhar de vez em
-quando, sem avisar.
-
-Não é motivo pra preocupação diária: quando um calendário de feriado vence, **o próprio motor
-imprime um AVISO** na hora em que você calcula um prazo. Ele degrada avisando, nunca em
-silêncio.
-
-Ainda assim, uma vez por mês, ou sempre que a mentoria disser que saiu correção de prazo, rode
-isto dentro do Claude:
-
-```
-/plugin marketplace update jurislabs
-```
-
-**O que você vai ver:** ou uma confirmação de que já está atualizado, ou a lista do que foi
-atualizado. Essa atualização manual usa o seu login do GitHub e funciona sempre.
-
 ## Quando o Conector muda
 
 O Conector DJEN é diferente do kit: correção de comportamento (regra de prazo, calendário de
@@ -525,10 +457,9 @@ consegue ligar de novo — é a sua chave.
 - [ ] `claude --version`, `git --version` e `gh --version` respondendo com número de versão
 - [ ] `gh auth login` feito, mostrando `✓ Logged in as SEUUSUARIO`
 - [ ] Pasta `kit-advogado` baixada
-- [ ] Plugin `jurislabs-prazos` instalado e **auto-update ligado** (o menu mostra "Disable auto-update")
 - [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**
 - [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta do escritório criada
-- [ ] Você sabe que roda `/plugin marketplace update jurislabs` uma vez por mês
+- [ ] Você guardou o endereço do Conector num lugar seguro
 
 ---
 

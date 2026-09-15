@@ -70,8 +70,9 @@ Só fato, sem adjetivo. "Provado?" é o que separa narrativa de prova.
 
 ## 7. Prazos
 
-> **Regra do escritório:** todo prazo passa pela skill `jurislabs-prazos:prazo-cpc`
-> **e** por cálculo manual de conferência. Só entra aqui se os dois baterem.
+> **Regra do escritório:** todo prazo passa pelo Conector DJEN (ferramenta
+> `calcular_prazo`) **e** por cálculo manual de conferência. Só entra aqui se os
+> dois baterem.
 > Sem o regime marcado (CPC, CLT, CPP, JEC, administrativo), não calcule: pergunte.
 
 | Prazo de quê | Regime | Termo inicial | Dias | Úteis/corridos | Vencimento | Protocolar até (D-2) | Conferido |

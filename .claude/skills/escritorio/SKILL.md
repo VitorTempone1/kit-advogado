@@ -143,8 +143,8 @@ entrevista e segue.
 
 ## Regras do escritório
 
-- **Prazo**: toda contagem roda `jurislabs-prazos:prazo-cpc` **e** cálculo manual
-  de conferência; só vale se os dois baterem. Nunca estime data de cabeça. Sem o
+- **Prazo**: toda contagem é pedida ao Conector DJEN (ferramenta `calcular_prazo`)
+  **e** refeita por cálculo manual de conferência; só vale se os dois baterem. Nunca estime data de cabeça. Sem o
   regime marcado (CPC, CLT, CPP, JEC, administrativo), **pergunte** — não assuma.
 - **Citação**: nenhuma jurisprudência entra em documento sem tribunal, número,
   relator, data e fonte recuperada. Sem isso, `⚠️ NÃO VERIFICADO`.
