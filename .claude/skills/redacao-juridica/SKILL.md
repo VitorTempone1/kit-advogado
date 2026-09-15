@@ -130,7 +130,7 @@ A revisão é **uma passada só**, nesta ordem, e produz **um** relatório.
 ### Passo 1: varredura mecânica
 
 ```bash
-python3 .claude/skills/redacao-juridica/auditar-peca.py <arquivo.docx|.txt|.md>
+uv run .claude/skills/redacao-juridica/auditar-peca.py <arquivo.docx|.txt|.md>
 ```
 
 Conta o que se conta sem julgar: travessão, tique de apassivadora (`Registre-se`,

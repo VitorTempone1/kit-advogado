@@ -36,7 +36,7 @@ o convite, você precisa de uma conta gratuita em [github.com/signup](https://gi
 
 Depois de criar, **mande seu nome de usuário do GitHub pro mentor**. Ele envia o convite, e
 você precisa **aceitar** o convite (chega por e-mail e também aparece em
-[github.com/notifications](https://github.com/notifications)) antes do Passo 7.
+[github.com/notifications](https://github.com/notifications)) antes do Passo 8.
 
 **O que você vai ver:** um e-mail com o assunto começando por "Invitation to join", e um botão
 verde de aceite.
@@ -59,10 +59,13 @@ O que **não** funciona sem ele: buscar intimação nova no Diário, consultar a
 puxar texto de lei e **calcular prazo**. As skills avisam em uma frase quando faltar — elas não quebram e não
 inventam o que não conseguiram buscar.
 
-### 4. Git e GitHub CLI
+### 4. Git, GitHub CLI e uv
 
-Dois programas gratuitos. São eles que baixam o kit e que trazem as atualizações depois.
-A instalação deles está no caminho do seu sistema, mais abaixo.
+Três programas gratuitos. O **git** e o **GitHub CLI** baixam o kit e trazem as atualizações
+depois. O **uv** é quem roda as ferramentas em Python do kit: ler PDF de processo, transcrever
+vídeo e baixar legenda do YouTube. Sem o uv, essas três param.
+
+A instalação dos três está no caminho do seu sistema, mais abaixo.
 
 ---
 
@@ -132,6 +135,35 @@ gh --version
 
 **Se preferir o Homebrew** (só se você já usa): `brew install gh` faz o mesmo.
 
+## Passo 7. Instale o uv
+
+O `uv` é quem roda as ferramentas em Python do kit: ler PDF de processo, transcrever vídeo e
+baixar legenda do YouTube. Sem ele, essas três skills param.
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Demora alguns segundos, com texto correndo na tela.
+
+**O que você vai ver:** algumas linhas terminando com o caminho onde o `uv` foi instalado, tipo
+`installing to /Users/SEUNOME/.local/bin`.
+
+**Feche e abra o Terminal de novo** (**Command + Q** e Passo 1). É o mesmo caso do Passo 3: o
+`uv` só entra no caminho do sistema numa janela nova. **Se o Claude Code já estava aberto,
+feche e abra ele também** — senão ele continua sem enxergar o `uv`.
+
+Depois confirme:
+
+```
+uv --version
+```
+
+**O que você vai ver:** um número de versão, tipo `uv 0.9.7`.
+
+**Se der errado:** apareceu `command not found: uv`. Feche e abra o Terminal mais uma vez. Não
+resolveu, reinicie o Mac e repita este passo.
+
 **Agora pule para a parte "Baixando o kit"**, que é igual nos dois sistemas.
 
 ---
@@ -166,9 +198,9 @@ irm https://claude.ai/install.ps1 | iex
 **O que você vai ver:** texto correndo por 30 segundos a 2 minutos, e o cursor voltando a piscar
 numa linha que começa com `PS C:\`.
 
-## Passo 3. Instale o git e o GitHub CLI
+## Passo 3. Instale o git, o GitHub CLI e o uv
 
-Ainda no PowerShell, rode as duas linhas abaixo, **uma de cada vez**, apertando **Enter** depois
+Ainda no PowerShell, rode as três linhas abaixo, **uma de cada vez**, apertando **Enter** depois
 de cada uma e esperando terminar:
 
 ```
@@ -179,26 +211,41 @@ winget install --id Git.Git -e --source winget
 winget install --id GitHub.cli -e --source winget
 ```
 
+```
+winget install --id astral-sh.uv -e --source winget
+```
+
 Cada uma demora de 1 a 3 minutos e mostra uma barra de progresso.
 
 **O que você vai ver:** ao fim de cada uma, a frase **"Instalado com êxito"**
 (ou "Successfully installed").
 
+O `uv`, o da terceira linha, é quem roda as ferramentas em Python do kit: ler PDF de processo,
+transcrever vídeo e baixar legenda do YouTube. Sem ele, essas três skills param.
+
 **Se aparecer `winget não é reconhecido`:** seu Windows é antigo demais ou está sem a Loja.
-Instale os dois pelos instaladores oficiais, clicando **Avançar** até o fim:
+Instale o git e o GitHub CLI pelos instaladores oficiais, clicando **Avançar** até o fim:
 [git-scm.com/download/win](https://git-scm.com/download/win) e
-[cli.github.com](https://cli.github.com/).
+[cli.github.com](https://cli.github.com/). O `uv` não tem instalador de clicar: cole a linha
+abaixo no PowerShell, que é o comando oficial dele.
+
+```
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 ## Passo 4. Feche e abra o PowerShell de novo
 
 Feche a janela no **X** e abra de novo (Passo 1).
 
-Sem isso, o Windows continua não enxergando os três programas que acabaram de ser instalados.
+Sem isso, o Windows continua não enxergando os quatro programas que acabaram de ser instalados.
 É o passo que mais se pula e que mais causa erro depois.
 
-## Passo 5. Confirme que os três instalaram
+**Se o Claude Code já estava aberto, feche e abra ele também** — senão ele continua sem enxergar
+o `uv`.
 
-Rode as três linhas, uma de cada vez:
+## Passo 5. Confirme que os quatro instalaram
+
+Rode as quatro linhas, uma de cada vez:
 
 ```
 claude --version
@@ -209,8 +256,11 @@ git --version
 ```
 gh --version
 ```
+```
+uv --version
+```
 
-**O que você vai ver:** um número de versão em cada uma das três.
+**O que você vai ver:** um número de versão em cada uma das quatro, a última tipo `uv 0.9.7`.
 
 Faltou alguma? Vá pra tabela **Os 6 problemas do Windows**, logo abaixo.
 
@@ -264,14 +314,15 @@ PowerShell aberta ainda não sabe disso.
 **Conserto:** feche essa janela. No menu Iniciar, clique em **"Windows PowerShell"**, o item
 **sem** o `(x86)`. Refaça a instalação a partir do Passo 2.
 
-### Problema 5: o `git` ou o `gh` não é reconhecido depois do winget
+### Problema 5: o `git`, o `gh` ou o `uv` não é reconhecido depois do winget
 
-**Na tela:** `O termo 'git' não é reconhecido...` ou `O termo 'gh' não é reconhecido...`
+**Na tela:** `O termo 'git' não é reconhecido...`, `O termo 'gh' não é reconhecido...` ou
+`O termo 'uv' não é reconhecido...`
 
 **Por quê:** é o mesmo caso do Problema 3. O winget instalou, mas a janela aberta não enxerga.
 
 **Conserto:** feche o PowerShell e abra de novo. Não resolveu, reinicie o computador. É quase
-sempre isso.
+sempre isso. No caso do `uv`, feche e abra **também o Claude Code**, se ele estava aberto.
 
 ### Problema 6: o `gh auth login` abre o navegador e não volta
 
@@ -286,7 +337,7 @@ você confirmar que terminou no navegador.
 
 Daqui pra frente é idêntico nos dois sistemas.
 
-## Passo 7. Entre na sua conta do GitHub
+## Passo 8. Entre na sua conta do GitHub
 
 No Terminal (Mac) ou PowerShell (Windows):
 
@@ -312,7 +363,7 @@ O navegador abre sozinho. Cole o código, autorize, e volte pro Terminal.
 > cofre do sistema operacional. Sem ela, você teria que fazer login toda vez que fosse buscar
 > atualização.
 
-## Passo 8. Escolha onde o kit vai morar
+## Passo 9. Escolha onde o kit vai morar
 
 **Mac:**
 ```
@@ -329,7 +380,7 @@ cd "$env:USERPROFILE\Documentos"
 **O que você vai ver:** nada, só o cursor numa linha nova mostrando a pasta. No terminal,
 silêncio quer dizer que deu certo.
 
-## Passo 9. Baixe o kit
+## Passo 10. Baixe o kit
 
 ```
 gh repo clone VitorTempone1/kit-advogado
@@ -341,7 +392,7 @@ arquivos.
 **Se der `Could not resolve to a Repository`:** você ainda não aceitou o convite, ou entrou
 numa conta diferente da que foi convidada. Volte ao pré-requisito 2.
 
-## Passo 10. Entre na pasta e abra o Claude
+## Passo 11. Entre na pasta e abra o Claude
 
 ```
 cd kit-advogado
@@ -358,7 +409,7 @@ de texto esperando. **Você chegou.**
 > dos seus clientes ficam em outra pasta, e o sistema sabe chegar lá sozinho — você não precisa
 > abrir o Claude lá dentro.
 
-## Passo 11. Ligue o Conector DJEN
+## Passo 12. Ligue o Conector DJEN
 
 O cálculo de prazo **não** vem no kit, e isso é de propósito: ele mora no Conector DJEN, junto
 com os calendários de feriado dos 27 tribunais. Fica no servidor da JurisLabs, sempre atual —
@@ -396,7 +447,7 @@ ferramentas**.
 **Se aparecer com menos de 5 ferramentas ou como failed:** veja **"Quando o Conector muda"**,
 no fim deste documento.
 
-## Passo 12. Configure o kit pro seu escritório
+## Passo 13. Configure o kit pro seu escritório
 
 Dentro do Claude, digite e aperte **Enter**:
 
@@ -454,7 +505,8 @@ consegue ligar de novo — é a sua chave.
 
 - [ ] Plano **Pro** (ou maior) na conta Claude
 - [ ] Convite do GitHub **aceito**
-- [ ] `claude --version`, `git --version` e `gh --version` respondendo com número de versão
+- [ ] `claude --version`, `git --version`, `gh --version` e `uv --version` respondendo com número
+      de versão
 - [ ] `gh auth login` feito, mostrando `✓ Logged in as SEUUSUARIO`
 - [ ] Pasta `kit-advogado` baixada
 - [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**

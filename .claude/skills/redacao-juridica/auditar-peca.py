@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["python-docx>=1.1"]
+# ///
 """Varredura mecânica de peça jurídica: padrão de redação + marcas de texto de IA, numa passada só.
 
-    python3 auditar-peca.py <arquivo.docx|.txt|.md>
-    python3 auditar-peca.py --teste          # autoteste
+    uv run auditar-peca.py <arquivo.docx|.txt|.md>
+    uv run auditar-peca.py --teste           # autoteste
 
 Reporta só o que se conta sem julgar: travessão, tique de apassivadora, tratamento
 das partes inconsistente, repetição literal entre parágrafos, metacomentário,
