@@ -1,0 +1,8 @@
+# Dado de cliente não mora neste repositório: a pasta do escritório fica fora daqui.
+.env
+.DS_Store
+._*
+*.docx
+*.pdf
+dados/
+clientes/
