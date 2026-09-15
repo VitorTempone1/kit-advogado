@@ -30,9 +30,9 @@ Antes de tudo, porque é o que evita o problema sério:
 | O quê | Por quê |
 |---|---|
 | **Claude Pro** (US$ 20/mês) ou maior | O plano gratuito não abre o Claude Code |
-| **Conta no GitHub**, com o convite aceito | Este repositório é privado |
 | **Assinatura do Conector DJEN** | Sem ela, o sistema não busca intimação, processo nem lei, e não calcula prazo |
-| **git** e **GitHub CLI** | Baixam o kit e trazem as atualizações |
+| **git** | Baixa o kit e traz as atualizações |
+| **uv** | Roda as ferramentas em Python: ler PDF, transcrever vídeo, baixar legenda |
 
 O INSTALACAO.md instala tudo isso, passo por passo.
 
@@ -69,7 +69,7 @@ modelos/            suas peças-modelo
 ```
 
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
-calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 11 do INSTALACAO.md liga.
+calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
 
 ---
 
