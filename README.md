@@ -89,7 +89,12 @@ desenhado pra que continue assim.
 ## Como chegam as atualizações
 
 Rode `/iniciar` ao abrir o dia: ele confere sozinho se tem versão nova do kit e pergunta se pode
-puxar. O motor de prazo se atualiza sozinho pelo auto-update do plugin.
+puxar.
+
+O motor de prazo se atualiza sozinho em segundo plano, mas como ele mora num repositório
+fechado essa atualização pode falhar de vez em quando. Uma vez por mês, rode
+`/plugin marketplace update jurislabs` dentro do Claude. Se um calendário de feriado vencer, o
+motor avisa sozinho na hora do cálculo.
 
 **Uma coisa não se atualiza sozinha:** quando o Conector DJEN ganha uma ferramenta nova, o seu
 Claude continua vendo as antigas, sem erro e sem aviso. Quando a mentoria avisar que saiu

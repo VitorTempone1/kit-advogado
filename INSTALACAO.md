@@ -478,6 +478,26 @@ git pull
 **O que você vai ver:** ou `Already up to date.` (você já está na última versão), ou uma lista
 de arquivos atualizados.
 
+## Uma vez por mês: confira o motor de prazo
+
+O motor de prazo se atualiza sozinho em segundo plano — **quase sempre**. Ele mora num
+repositório fechado, e a atualização automática de repositório fechado pode falhar de vez em
+quando, sem avisar.
+
+Não é motivo pra preocupação diária: quando um calendário de feriado vence, **o próprio motor
+imprime um AVISO** na hora em que você calcula um prazo. Ele degrada avisando, nunca em
+silêncio.
+
+Ainda assim, uma vez por mês, ou sempre que a mentoria disser que saiu correção de prazo, rode
+isto dentro do Claude:
+
+```
+/plugin marketplace update jurislabs
+```
+
+**O que você vai ver:** ou uma confirmação de que já está atualizado, ou a lista do que foi
+atualizado. Essa atualização manual usa o seu login do GitHub e funciona sempre.
+
 ## Quando o Conector muda
 
 O Conector DJEN é diferente do kit: correção de comportamento (regra de prazo, calendário de
@@ -508,6 +528,7 @@ consegue ligar de novo — é a sua chave.
 - [ ] Plugin `jurislabs-prazos` instalado e **auto-update ligado** (o menu mostra "Disable auto-update")
 - [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**
 - [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta do escritório criada
+- [ ] Você sabe que roda `/plugin marketplace update jurislabs` uma vez por mês
 
 ---
 
