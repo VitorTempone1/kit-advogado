@@ -6,3 +6,6 @@
 *.pdf
 dados/
 clientes/
+
+# Arquivos desta máquina (o /setup grava). Nunca versionados: evitam conflito no git pull.
+settings.local.json
