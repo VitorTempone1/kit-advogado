@@ -60,13 +60,26 @@ o que não conseguiram buscar.
 
 ## O que tem aqui dentro
 
+Este repositório é baixado **como a pasta `.claude`** de uma pasta nova do seu escritório, a
+`JurisLabs`, em `Documentos`. O Claude abre na `JurisLabs` e enxerga tudo junto:
+
 ```
-.claude/commands/   /setup e /iniciar
-.claude/skills/     o que o sistema sabe fazer
-.claude/agents/     os três advogados de IA
-_contexto/          espaço do seu contexto de trabalho
-modelos/            suas peças-modelo
+JurisLabs/               a pasta do seu escritório. O Claude abre AQUI
+├── AGENTS.md            o perfil e as regras do escritório
+├── CLAUDE.md            uma linha: @AGENTS.md
+├── .claude/             o sistema: este repositório. Ninguém edita
+│   ├── CLAUDE.md        as regras do sistema
+│   ├── commands/        /setup e /iniciar
+│   ├── skills/          o que o sistema sabe fazer
+│   └── agents/          os três advogados de IA
+├── _contexto/           quem é o escritório, o mapa das pastas, estilo de escrita, marca
+├── _memoria/            as decisões, com data
+├── _triagem/            o que a migração não soube classificar
+├── desfazer/            o registro de cada movimento, pra voltar tudo
+└── clientes/  modelos/  financeiro/  marketing/ ...   as frentes que você escolheu
 ```
+
+Quem monta tudo que está fora da `.claude` é o `/setup`, com você.
 
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
@@ -75,11 +88,13 @@ calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INST
 
 ## Onde ficam os dados dos seus clientes
 
-**Fora desta pasta, e de propósito.**
+**Na pasta `JurisLabs`, fora da `.claude`, e de propósito.**
 
-O `/setup` cria uma pasta separada no seu computador — em `Documentos`, por exemplo — e é lá que
-moram os casos. Aquela pasta **não é um repositório de código**: sem isso, não existe comando que
-leve por engano nome, CPF ou processo de cliente pra fora da sua máquina.
+A `.claude` é o sistema e vem da internet. O resto da `JurisLabs` é seu, e é lá que moram os
+casos. A pasta `JurisLabs` **não é um repositório de código**: sem isso, não existe comando que
+leve por engano nome, CPF ou processo de cliente pra fora da sua máquina. A pasta que você já
+usava antes não é tocada na instalação; o `/setup` pergunta por ela e só traz alguma coisa com a
+sua aprovação.
 
 A JurisLabs nunca vê o dado do seu cliente. Você é o controlador desses dados, e o sistema é
 desenhado pra que continue assim.
@@ -88,8 +103,9 @@ desenhado pra que continue assim.
 
 ## Como chegam as atualizações
 
-Rode `/iniciar` ao abrir o dia: ele confere sozinho se tem versão nova do kit e pergunta se pode
-puxar.
+Sozinhas. Toda vez que você abre o Claude na pasta `JurisLabs`, ele confere se tem versão nova do
+kit e já puxa, avisando em uma linha. Pra isso, na primeira abertura, responda **sim** quando o
+Claude perguntar se confia na pasta.
 
 O cálculo de prazo não precisa de atualização nenhuma da sua parte: regra de contagem e
 calendário de feriado moram no servidor do Conector DJEN e mudam lá.

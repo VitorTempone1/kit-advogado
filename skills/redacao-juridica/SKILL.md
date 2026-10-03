@@ -18,6 +18,9 @@ convence é a lei, o Manual de Marcas e o assentamento do próprio Instituto.
 der para reduzir o texto sem perda de conteúdo jurídico, a versão mais concisa
 vence. Isso prevalece em toda petição, recurso, manifestação e parecer.
 
+Se existir `_contexto/estilo-de-escrita.md` na raiz da pasta aberta, leia antes de
+escrever e siga na forma. Nenhuma regra desta skill afrouxa por causa dele.
+
 ---
 
 ## Princípios

@@ -53,8 +53,8 @@ Reunião ou audiência de um caso vai dentro da pasta do caso:
 <pasta do escritório>/clientes/<slug>/reuniao/AAAA-MM-DD-<assunto>.transcricao.md
 ```
 
-A pasta do escritório fica fora deste repositório e o caminho dela está no
-perfil (o `CLAUDE.md` da pasta do escritório, que o `/setup` grava).
+A pasta do escritório é a pasta aberta (o sistema mora em `.claude/`).
+Casos novos seguem a organização descrita em `clientes/AGENTS.md`; sem essa descrição, `clientes/<slug>/`.
 
 Depois de gravar a transcrição, **escreva também o `.resumo.md` ao lado**, com:
 objetivo da conversa, principais conclusões, tópicos, próximos passos e itens de

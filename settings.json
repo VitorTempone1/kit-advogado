@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git -C .claude pull --ff-only --quiet",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Você confere se o registro do escritório ficou em dia antes de o Claude encerrar a resposta. Dados do evento: $ARGUMENTS\n\nSe stop_hook_active for true, responda {\"ok\": true}.\n\nResponda {\"ok\": false, \"reason\": \"...\"} SOMENTE se, nesta resposta, o Claude criou ou alterou arquivo dentro de uma pasta de cliente (clientes/...) ou de uma frente do escritório (contratos/, financeiro/, marketing/, atendimento/, administrativo/, teses/, modelos/) E não acrescentou o checkpoint datado correspondente: no briefing.md do caso, quando o trabalho foi num caso; em _memoria/decisoes.md, quando o advogado tomou uma decisão; no AGENTS.md da frente, quando uma regra daquela pasta mudou. Em reason, diga em uma frase o que registrar e onde, acrescentando sem reescrever o que já estava. Nunca peça para mexer em prazo, em status de prazo ou para mover arquivo.\n\nEm qualquer outro caso, inclusive conversa sem arquivo alterado ou dúvida, responda {\"ok\": true}.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

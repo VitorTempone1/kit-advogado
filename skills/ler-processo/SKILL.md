@@ -20,7 +20,7 @@ Leia antes de tudo. Cada uma existe porque a violação destrói a confiança no
 
 ## Passo 0 — perfil e arquivo
 
-Leia o `CLAUDE.md` da pasta do escritório (área de atuação, tribunais, sistema). Se não existir, avise que `/setup` deixa a leitura mais afiada, e siga assim mesmo — não trave o advogado por causa de onboarding.
+Leia o perfil, o `AGENTS.md` da raiz da pasta aberta (área de atuação, tribunais, sistema). Se não existir, avise que `/setup` deixa a leitura mais afiada, e siga assim mesmo — não trave o advogado por causa de onboarding.
 
 Confirme o caminho do PDF. Se ele apontar uma pasta com vários PDFs (autos vêm partidos em volumes), rode o mapa em cada um e trate como um processo só, guardando de qual arquivo veio cada página.
 

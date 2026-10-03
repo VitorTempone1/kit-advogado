@@ -297,7 +297,11 @@ Daqui pra frente é idêntico nos dois sistemas.
 > **Não falta nada.** O Passo 6 é "instale o uv", e no Windows ele já foi instalado
 > junto com o git, lá no Passo 3.
 
-## Passo 7. Escolha onde o kit vai morar
+## Passo 7. Vá para a pasta Documentos
+
+O sistema vai morar numa pasta nova chamada `JurisLabs`, dentro de `Documentos`. É a pasta do seu
+escritório daqui pra frente. A pasta que você já usa hoje **não é tocada** nesta instalação: o
+`/setup` pergunta por ela depois, e só mexe nela com a sua aprovação.
 
 **Mac:**
 ```
@@ -314,36 +318,51 @@ cd "$env:USERPROFILE\Documentos"
 **O que você vai ver:** nada, só o cursor numa linha nova mostrando a pasta. No terminal,
 silêncio quer dizer que deu certo.
 
-## Passo 8. Baixe o kit
+## Passo 8. Baixe o kit para dentro da pasta nova
 
 ```
-git clone https://github.com/VitorTempone1/kit-advogado.git
+git clone https://github.com/VitorTempone1/kit-advogado.git JurisLabs/.claude
 ```
+
+Esta linha cria a pasta `JurisLabs` e, dentro dela, uma pasta `.claude` com o sistema. Copie a
+linha inteira, com o `JurisLabs/.claude` no fim: é ele que põe cada coisa no lugar certo.
 
 O repositório é público: não pede senha nem login nenhum.
 
-**O que você vai ver:** algumas linhas com `Cloning into 'kit-advogado'...` e contagem de
+**O que você vai ver:** algumas linhas com `Cloning into 'JurisLabs/.claude'...` e contagem de
 arquivos.
+
+> **Não estranhe se a pasta `.claude` não aparecer no Finder ou no Explorador de Arquivos.**
+> Pasta com nome começando por ponto fica escondida. Está lá, e é bom que fique: é o sistema, e
+> ninguém precisa abrir nem editar nada dentro dela.
 
 **Se der `command not found: git`:** o git não instalou. Volte ao Passo 5 (Mac) ou ao Passo 3
 (Windows).
 
-## Passo 9. Entre na pasta e abra o Claude
+## Passo 9. Entre na pasta JurisLabs e abra o Claude
 
 ```
-cd kit-advogado
+cd JurisLabs
 ```
 ```
 claude
 ```
 
-**O que você vai ver:** na primeira vez ele abre o navegador pedindo login na sua conta Claude.
-Faça o login, autorize, e volte pro terminal. Depois disso, a tela do Claude Code com um campo
-de texto esperando. **Você chegou.**
+Atenção: entre em `JurisLabs`, **não** em `.claude`.
 
-> **Abra o Claude sempre nesta pasta.** É daqui que ele enxerga as skills do kit. Os arquivos
-> dos seus clientes ficam em outra pasta, e o sistema sabe chegar lá sozinho — você não precisa
-> abrir o Claude lá dentro.
+**O que você vai ver:** na primeira vez ele abre o navegador pedindo login na sua conta Claude.
+Faça o login, autorize, e volte pro terminal.
+
+Em seguida o Claude pergunta se você **confia nesta pasta** (em inglês, algo como *"Do you trust
+the files in this folder?"*). **Responda que sim.** A pergunta existe porque o Claude vai seguir as
+instruções que estão nesta pasta, e quem escreveu essas instruções foi a JurisLabs, no kit que você
+acabou de baixar. Se você responder que não, o sistema abre pela metade e **não se atualiza
+sozinho**. A pergunta só aparece na primeira vez.
+
+Depois disso, a tela do Claude Code com um campo de texto esperando. **Você chegou.**
+
+> **Abra o Claude sempre na pasta `JurisLabs`.** É daqui que ele enxerga o sistema (na `.claude`)
+> e os arquivos do seu escritório (no resto da pasta), tudo junto.
 
 ## Passo 10. Ligue o Conector DJEN
 
@@ -397,21 +416,25 @@ como você escreve.
 
 Pode sair no meio pra atender o telefone. A pergunta fica esperando, não tem cronômetro.
 
-No fim ele monta a pasta do seu escritório, grava o perfil e te diz onde ficou.
+Ele também pergunta onde fica a pasta que você já usa hoje, e só traz alguma coisa de lá com a sua
+aprovação. No fim ele organiza a pasta `JurisLabs`, grava o perfil e te mostra o que montou.
 **A instalação acabou.**
 
 ---
 
 # Depois: como chegam as atualizações
 
-Toda semana da mentoria sai coisa nova no kit. Você não precisa fazer nada pra descobrir:
-**quando você abrir o Claude nesta pasta e rodar `/iniciar`, ele confere sozinho** e te avisa
-se tem versão nova, perguntando se pode puxar.
+Toda semana da mentoria sai coisa nova no kit. Você não precisa fazer nada: **toda vez que você
+abre o Claude na pasta `JurisLabs`, ele confere sozinho se tem versão nova e já puxa.** Quando
+atualiza, avisa em uma linha, e a novidade vale a partir da próxima conversa. Sem internet, ele
+segue com a versão que você já tem.
 
-Se preferir puxar na mão, saia do Claude com `/exit` e rode, dentro da pasta `kit-advogado`:
+Isso só funciona se você respondeu **sim** quando o Claude perguntou se confia na pasta (Passo 9).
+
+Se quiser puxar na mão, saia do Claude com `/exit` e rode, dentro da pasta `JurisLabs`:
 
 ```
-git pull
+git -C .claude pull
 ```
 
 **O que você vai ver:** ou `Already up to date.` (você já está na última versão), ou uma lista
@@ -441,9 +464,10 @@ consegue ligar de novo — é a sua chave.
 
 - [ ] Plano **Pro** (ou maior) na conta Claude
 - [ ] `claude --version`, `git --version` e `uv --version` respondendo com número de versão
-- [ ] Pasta `kit-advogado` baixada
+- [ ] Pasta `JurisLabs` criada em Documentos, com o kit dentro dela na `.claude`
+- [ ] Claude aberto na pasta `JurisLabs`, e você respondeu **sim** ao "confia nesta pasta?"
 - [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**
-- [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta do escritório criada
+- [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta `JurisLabs` organizada
 - [ ] Você guardou o endereço do Conector num lugar seguro
 
 ---
@@ -453,10 +477,11 @@ consegue ligar de novo — é a sua chave.
 **Nenhuma saída do sistema é peça pronta.** Tudo que sai daqui é minuta pra sua revisão. O
 sistema não protocola, não assina e não peticiona. O último clique é sempre seu.
 
-**A pasta do seu escritório fica só na sua máquina.** Ela é criada **fora** desta pasta do kit
-e, de propósito, **não é um repositório de código**: sem isso, não existe comando que leve por
-engano nome, CPF ou processo de cliente pra fora do seu computador. Nós nunca vemos o dado do
-seu cliente. Você é o controlador desses dados.
+**A pasta do seu escritório fica só na sua máquina.** A pasta do seu escritório é a `JurisLabs`,
+e ela, de propósito, **não é um repositório de código**: sem isso, não existe comando que leve por
+engano nome, CPF ou processo de cliente pra fora do seu computador. Só a `.claude`, lá dentro, é
+repositório: ela traz o sistema e as atualizações, e nunca leva nada seu pra fora. Nós nunca vemos
+o dado do seu cliente. Você é o controlador desses dados.
 
 **O endereço do Conector é pessoal e é a sua chave.** Não mande em grupo, não cole em
 documento compartilhado, não publique em print. Vazou: avise a mentoria, que a gente cancela na

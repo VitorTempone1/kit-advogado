@@ -57,7 +57,7 @@ velho e acha que falhou.
 ## Formato
 
 Arquivo Markdown com caixinhas `- [ ]`, gravado em `tutoriais/AAAA-MM-DD-<tema>.md`
-dentro da pasta do escritório (o caminho está no perfil). Caixinha porque
+dentro da pasta do escritório (a pasta aberta). Caixinha porque
 tutorial longo se faz em duas sentadas e ele precisa saber onde parou.
 
 Estrutura: título → uma frase dizendo o que vamos resolver → bloco "em três

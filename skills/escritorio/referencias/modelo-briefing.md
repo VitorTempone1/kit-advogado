@@ -9,7 +9,7 @@
 |---|---|
 | **Cliente** | {{CLIENTE}} |
 | **Escritório** | {{ESCRITORIO}} |
-| **Pasta** | `clientes/{{SLUG}}/` |
+| **Pasta** | `{{PASTA}}` |
 | **1º atendimento** | {{DATA}} |
 | **Responsável** | {{ADVOGADO}} |
 | **Status** | consulta / em análise / contratado / ajuizado / em curso / encerrado |

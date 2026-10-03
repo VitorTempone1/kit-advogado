@@ -42,8 +42,8 @@ Se o vídeo tem a ver com um caso, grave dentro da pasta do caso:
 <pasta do escritório>/clientes/<slug>/reuniao/AAAA-MM-DD-<assunto>.transcricao.md
 ```
 
-A pasta do escritório fica fora deste repositório e o caminho dela está no
-perfil (o `CLAUDE.md` da pasta do escritório, que o `/setup` grava). Fora de
+A pasta do escritório é a pasta aberta (o sistema mora em `.claude/`).
+Casos novos seguem a organização descrita em `clientes/AGENTS.md`; sem essa descrição, `clientes/<slug>/`. Fora de
 caso, grave em `<pasta do escritório>/transcricoes/`.
 
 ## Regras

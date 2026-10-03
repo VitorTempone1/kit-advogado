@@ -11,10 +11,10 @@ jogo. **Controle é tudo.**
 
 ## Antes de qualquer coisa
 
-1. **Leia o perfil.** O perfil é o `CLAUDE.md` que fica na pasta do escritório —
-   pasta que mora fora deste repositório. É de lá que saem o nome do escritório,
-   o nome do advogado responsável, a OAB (número e UF), o caminho da pasta do
-   escritório e a área de atuação. Sempre que este arquivo falar em "o perfil",
+1. **Leia o perfil.** A pasta do escritório é a pasta aberta (o sistema mora em
+   `.claude/`), e o perfil é o `AGENTS.md` da raiz dela. É de lá que saem o nome
+   do escritório, o nome do advogado responsável, a OAB (número e UF) e a área de
+   atuação. Sempre que este arquivo falar em "o perfil",
    é esse arquivo.
    Se o perfil não existir, diga em uma frase: "rode `/setup` primeiro" e **pare**.
 2. Se a pasta do cliente já existe, **leia o `briefing.md` inteiro antes de agir**.
@@ -26,7 +26,7 @@ jogo. **Controle é tudo.**
    (`Pierre Duarte` → `pierre-duarte`). Se já existir pasta com esse slug,
    pergunte se é o mesmo cliente antes de mexer.
 
-2. **Criar estrutura** dentro da pasta do escritório (o caminho está no perfil):
+2. **Criar estrutura** dentro da pasta do escritório (a pasta aberta). Casos novos seguem a organização descrita em `clientes/AGENTS.md`; sem essa descrição, `clientes/<slug>/`.
    ```
    clientes/<slug>/
    ├── briefing.md          ← cópia de referencias/modelo-briefing.md, preenchida
@@ -38,12 +38,13 @@ jogo. **Controle é tudo.**
    ```
    O modelo do briefing está em
    `.claude/skills/escritorio/referencias/modelo-briefing.md`, aqui no repositório.
-   Substitua `{{ESCRITORIO}}`, `{{ADVOGADO}}`, `{{CLIENTE}}`, `{{SLUG}}` e
-   `{{DATA}}` ao copiar — escritório e advogado saem do perfil.
+   Substitua `{{ESCRITORIO}}`, `{{ADVOGADO}}`, `{{CLIENTE}}`, `{{SLUG}}`, `{{PASTA}}`
+   (o caminho da pasta do caso) e `{{DATA}}` ao copiar — escritório e advogado saem do perfil.
 
 3. **Confirmar que a pasta do escritório NÃO é um repositório** — não é opcional.
-   Use o Glob procurando `.git` a partir da pasta do escritório (o caminho está
-   no perfil), e confira também as pastas acima dela. **Se encontrar `.git`, PARE**, avise o
+   Use o Glob procurando `.git` na raiz da pasta do escritório (a pasta aberta),
+   e confira também as pastas acima dela. O `.claude/` ser repositório é esperado e
+   não conta. **Se encontrar `.git`, PARE**, avise o
    advogado e não escreva nenhum dado de cliente até ele mover a pasta pra fora do
    repositório. Nome, CPF e número de processo dentro de um repositório é um
    `git push` de distância de virar violação de sigilo (art. 34, VII, EOAB) e de
