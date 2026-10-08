@@ -442,7 +442,8 @@ no caso do fulano" e o Codex abre um ajudante para cada um.
 # Depois: como chegam as atualizações
 
 Toda semana da mentoria sai coisa nova no kit. Você não precisa fazer nada: **toda vez que você
-abre o Codex na pasta `JurisLabs`, ele confere sozinho se tem versão nova e já puxa.** Sem
+abre o Codex na pasta `JurisLabs` e manda a primeira mensagem, ele confere sozinho se tem versão
+nova e já puxa.** Sem
 internet, ele segue com a versão que você já tem.
 
 Isso só funciona se você respondeu **sim** ao "confia nesta pasta?" e aprovou o item no `/hooks`
