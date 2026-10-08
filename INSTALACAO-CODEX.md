@@ -399,7 +399,7 @@ Abra o Codex de novo (`codex`) e confira, dentro dele:
 /mcp
 ```
 
-**O que você vai ver:** `conector-djen` na lista, com **5 ferramentas**.
+**O que você vai ver:** `conector-djen` na lista, com **6 ferramentas**.
 
 ## Passo 12. Configure o kit pro seu escritório
 
@@ -480,7 +480,7 @@ consegue ligar de novo.
 - [ ] Pasta `JurisLabs` criada em Documentos, com o kit dentro dela na `.claude`
 - [ ] Passo 9 feito: as pastas `.agents` e `.codex` dentro de `JurisLabs`
 - [ ] Codex aberto na pasta `JurisLabs`, pasta confiada e item aprovado no `/hooks`
-- [ ] Conector DJEN ligado, aparecendo em `/mcp` com **5 ferramentas**
+- [ ] Conector DJEN ligado, aparecendo em `/mcp` com **6 ferramentas**
 - [ ] `$setup-codex` rodado até o fim, com o perfil gravado
 - [ ] Você guardou o endereço do Conector num lugar seguro
 

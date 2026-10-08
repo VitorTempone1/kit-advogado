@@ -396,10 +396,10 @@ E confirme, dentro do Claude:
 /mcp
 ```
 
-**O que você vai ver:** `conector-djen` na lista, marcado como **connected**, com **5
+**O que você vai ver:** `conector-djen` na lista, marcado como **connected**, com **6
 ferramentas**.
 
-**Se aparecer com menos de 5 ferramentas ou como failed:** veja **"Quando o Conector muda"**,
+**Se aparecer com menos de 6 ferramentas ou como failed:** veja **"Quando o Conector muda"**,
 no fim deste documento.
 
 ## Passo 11. Configure o kit pro seu escritório
@@ -466,7 +466,7 @@ consegue ligar de novo — é a sua chave.
 - [ ] `claude --version`, `git --version` e `uv --version` respondendo com número de versão
 - [ ] Pasta `JurisLabs` criada em Documentos, com o kit dentro dela na `.claude`
 - [ ] Claude aberto na pasta `JurisLabs`, e você respondeu **sim** ao "confia nesta pasta?"
-- [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**
+- [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **6 ferramentas**
 - [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta `JurisLabs` organizada
 - [ ] Você guardou o endereço do Conector num lugar seguro
 

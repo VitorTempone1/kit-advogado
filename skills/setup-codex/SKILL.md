@@ -44,6 +44,13 @@ inteiro. O Codex não carrega esse arquivo sozinho, então você lê.
    Se o advogado disser que o Codex não puxou versão nova, peça que ele digite `/hooks` e
    aprove o do JurisLabs OS.
 
+7. **O Conector está ligado?** No Codex, as ferramentas de MCP nem sempre aparecem na lista da
+   sessão: podem estar guardadas atrás da busca de ferramentas. Antes de concluir "não ligado",
+   **procure ativamente** uma ferramenta que termine em `calcular_prazo` ou
+   `consultar_intimacoes` (use a busca de ferramentas, se houver). Só depois de procurar e não
+   achar, use a frase do setup, trocando "O INSTALACAO.md" por "O Passo 11 do
+   INSTALACAO-CODEX.md".
+
 ## No fim
 
 O mesmo fechamento do setup, com os nomes do Codex: as tarefas de teste de cada frente chamam
