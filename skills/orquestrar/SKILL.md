@@ -28,6 +28,10 @@ tempo. Quem organiza mal atinge o teto no meio de um prazo.
 A ordem é sempre **pesquisa → contrária → head**. Pular etapa estraga o head, e
 refazer custa mais do que fazer certo na primeira.
 
+**No Codex** não há agente com nome. Abra um subagente e mande, como primeira
+ordem, ler `.claude/agents/<nome>.md` e seguir aquele arquivo. O resto deste
+método vale igual.
+
 **Sem o Conector DJEN.** Intimação, DJEN, consulta de processo e busca de
 legislação vêm do Conector DJEN, que é assinatura à parte. Se essas ferramentas
 não estiverem na máquina, avise em uma frase — "isto precisa do Conector DJEN,

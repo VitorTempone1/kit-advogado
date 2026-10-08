@@ -9,6 +9,9 @@ estratégia.
 
 **Comece por [INSTALACAO.md](INSTALACAO.md).** É o passo a passo do zero, para Mac e Windows.
 
+**Usa o ChatGPT?** O sistema também roda no **Codex**, o assistente de terminal da OpenAI, com a
+sua assinatura do ChatGPT. O passo a passo está em [INSTALACAO-CODEX.md](INSTALACAO-CODEX.md).
+
 ---
 
 ## O que este sistema NÃO faz

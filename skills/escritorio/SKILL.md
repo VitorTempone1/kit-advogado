@@ -114,6 +114,9 @@ Ao despachar, passe no prompt: caminho completo da pasta do caso, o que já foi
 lido, e a pergunta jurídica específica. Agente sem pergunta específica devolve
 lugar-comum.
 
+No Codex não há agente com nome: abra um subagente e mande, como primeira ordem,
+ler `.claude/agents/<nome>.md` e seguir aquele arquivo.
+
 Pesquisa e contrária podem rodar em paralelo **só depois** que já existe uma
 rodada de pesquisa — na primeira vez, a contrária espera a pesquisa.
 

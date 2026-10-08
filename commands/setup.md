@@ -421,7 +421,7 @@ Tom: <tom>
 Peça mais frequente: <peça>
 
 ## O sistema
-As regras do sistema estão em .claude/CLAUDE.md, que se atualiza sozinho. Não edite nada em .claude/.
+Antes de qualquer tarefa, leia .claude/CLAUDE.md: são as regras do sistema, que se atualizam sozinhas. Não edite nada em .claude/.
 Conector: <ligado / não ligado>
 Frentes: <lista, uma por linha, com a pasta>. Antes de trabalhar numa frente, leia o AGENTS.md dela.
 Registro da entrevista: _contexto/escritorio.md. Mapa das pastas: _contexto/pastas.md.
