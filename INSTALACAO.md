@@ -305,15 +305,17 @@ escritório daqui pra frente. A pasta que você já usa hoje **não é tocada** 
 
 **Mac:**
 ```
-cd ~/Documentos
+cd ~/Documents
 ```
-(Se o seu Mac estiver em inglês, troque `Documentos` por `Documents`.)
 
 **Windows:**
 ```
-cd "$env:USERPROFILE\Documentos"
+cd ([Environment]::GetFolderPath('MyDocuments'))
 ```
-(Se o seu Windows estiver em inglês, troque `Documentos` por `Documents`.)
+
+Copie a linha exatamente assim, **mesmo com o computador em português**. A pasta que você vê
+como "Documentos" se chama `Documents` por baixo; o nome em português é só o que a tela mostra.
+No Windows, a linha acima acha a pasta certa até quando ela está dentro do OneDrive.
 
 **O que você vai ver:** nada, só o cursor numa linha nova mostrando a pasta. No terminal,
 silêncio quer dizer que deu certo.
