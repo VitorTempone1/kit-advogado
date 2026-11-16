@@ -82,6 +82,11 @@ def ler(arq: Path):
     return (t[:3000], t[-1200:]) if len(t) >= 200 else None
 
 
+def prioridade(lista, txt):
+    """O primeiro da LISTA que aparece no texto (a lista vai do orgao mais especifico ao mais geral)."""
+    return next((nome for nome, rx in lista if re.search(rx, txt, re.I)), None)
+
+
 def primeiro(lista, txt):
     achados = [(m.start(), nome) for nome, rx in lista for m in [re.search(rx, txt, re.I)] if m]
     return min(achados)[1] if achados else None
@@ -110,7 +115,7 @@ def censo(pasta: Path, oab: str = ""):
                 continue
             tipo = primeiro(TIPOS, ini) or "Outra peça"
             c["tipo"][tipo] += 1
-            c["justica"][primeiro(JUSTICA, ini[:800]) or "não identificada"] += 1
+            c["justica"][prioridade(JUSTICA, ini[:800]) or "não identificada"] += 1
             for m in {x.strip().title() for x in COMARCA.findall(ini[:800])}:
                 c["comarca"][m] += 1
             for uf, num in assinaturas:
@@ -178,6 +183,8 @@ def demo():
                                        "BELTRANA vem apresentar CONTESTAÇÃO", "I. DOS FATOS", "II. DO MÉRITO"] + miolo + assin,
         "Clientes/Civ/C/arquivo qualquer.docx": ["EXCELENTÍSSIMO SENHOR JUIZ DE DIREITO DA COMARCA DE TIMÓTEO/MG",
                                                  "CICLANO vem propor AÇÃO DE COBRANÇA", "I. DOS FATOS"] + miolo + assin,
+        "Clientes/Civ/D/jec.docx": ["EXCELENTÍSSIMO SENHOR JUIZ DE DIREITO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE ITABIRA/MG",
+                                    "FULANO vem propor AÇÃO DE INDENIZAÇÃO"] + miolo + assin,
         "Modelos/procuracao.docx": ["PROCURAÇÃO", "Outorgante: X"] + miolo,
         "Clientes/Civ/C/contestacao do reu.docx": ["EXCELENTÍSSIMO SENHOR JUIZ DE DIREITO DA COMARCA DE BELO HORIZONTE/MG",
                                                   "O RÉU vem apresentar CONTESTAÇÃO"] + miolo + ["Advogado do réu, OAB/SP 999.999"],
@@ -192,18 +199,19 @@ def demo():
         arqs, ileg, pecas, c, alheias = censo(Path(d), "123456")
         assert alheias == 1, "peca do advogado do reu tem que ficar fora"
         assert "Belo Horizonte" not in c["comarca"]
-        assert len(pecas) == 3, f"devia reconhecer 3 pecas, achou {len(pecas)} (procuracao nao e peca; Pessoal pula)"
+        assert c["justica"]["Juizado Especial"] == 1, "Juizado tem prazo proprio: nao pode virar Justica Estadual"
+        assert len(pecas) == 4, f"devia reconhecer 4 pecas, achou {len(pecas)} (procuracao nao e peca; Pessoal pula)"
         assert c["tipo"]["Reclamação trabalhista"] == 1 and c["tipo"]["Contestação"] == 1
-        assert c["tipo"]["Petição inicial (ação)"] == 1, "peca com nome de arquivo qualquer tem que ser lida pelo conteudo"
-        assert c["comarca"]["Timóteo"] == 2 and c["comarca"]["Itabira"] == 1, dict(c["comarca"])
-        assert c["oab"]["OAB/MG 123456"] == 3
+        assert c["tipo"]["Petição inicial (ação)"] == 2, "peca com nome de arquivo qualquer tem que ser lida pelo conteudo"
+        assert c["comarca"]["Timóteo"] == 2 and c["comarca"]["Itabira"] == 2, dict(c["comarca"])
+        assert c["oab"]["OAB/MG 123456"] == 4
         assert c["justica"]["Justiça do Trabalho"] == 1
         assert c["secao"]["DOS FATOS"] == 3
-        assert c["formula"]["devida vênia"] == 3 and c["formula"]["pede deferimento"] == 3
+        assert c["formula"]["devida vênia"] == 4 and c["formula"]["pede deferimento"] == 4
         assert ileg == 1, "o docx vazio conta como ilegivel"
         rel = relatorio(Path(d), "123456")
         assert "FULANO" not in rel and "BELTRANA" not in rel and "CICLANO" not in rel, "nome de parte vazou"
-        assert len(amostra(pecas)) == 3
+        assert len(amostra(pecas)) == 4
     print("demo ok")
 
 
