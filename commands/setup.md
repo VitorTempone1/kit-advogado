@@ -506,8 +506,6 @@ Antes da Confirmação, repita pelo nome, numa frase: "Vão nascer: Casos, Model
 Atendimento e Instagram. Confere?"
 
 | Frente | Pasta | Exemplo (descrição da opção) |
-
-| Frente | Pasta | Exemplo (descrição da opção) |
 |---|---|---|
 | Casos | `clientes/` | "Me manda o PDF do processo e eu devolvo a linha do tempo e o próximo prazo" |
 | Modelos de peça | `modelos/` | "Escrevo a sua próxima contestação no seu estilo, a partir das suas melhores peças" |
