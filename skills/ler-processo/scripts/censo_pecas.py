@@ -25,6 +25,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from texto_docx import texto as texto_docx  # noqa: E402
 
+import logging
+logging.getLogger("pypdf").setLevel(logging.ERROR)  # PDF quebrado vira "ilegivel", sem barulho na tela
+
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except Exception:
@@ -44,7 +47,7 @@ def candidato(nome: str) -> bool:
 
 
 PULA_PASTA = re.compile(r"pessoal|particular|\.claude|_triagem|desfazer", re.I)
-ENDERECO = re.compile(r"EXCELENT[IÍ]SSIM|SENHOR(?:A|ES)?\s+(?:DOUTOR|JUIZ|DESEMBARGADOR|MINISTRO)|"
+ENDERECO = re.compile(r"\bAO\s+JU\S{1,2}ZO\b|\bEXM[OA]\b|EXCELENT[IÍ]SSIM|SENHOR(?:A|ES)?\s+(?:DOUTOR|JUIZ|DESEMBARGADOR|MINISTRO)|"
                       r"MERIT[IÍ]SSIM|JU[IÍ]Z(?:A|ES)?\s+(?:DE DIREITO|DO TRABALHO|FEDERAL)", re.I)
 TIPOS = [  # o que aparece PRIMEIRO no comeco da peca decide
     ("Reclamação trabalhista", r"RECLAMA[ÇC][ÃA]O TRABALHISTA"),
@@ -66,7 +69,8 @@ JUSTICA = [
     ("Justiça do Trabalho", r"JU[IÍ]Z(?:A)? DO TRABALHO|VARA DO TRABALHO|TRIBUNAL REGIONAL DO TRABALHO"),
     ("Justiça Federal", r"JU[IÍ]Z(?:A)? FEDERAL|VARA FEDERAL|TRIBUNAL REGIONAL FEDERAL"),
     ("Turma Recursal", r"TURMA RECURSAL"),
-    ("Juizado Especial", r"JUIZADO ESPECIAL"),
+    ("Juizado Especial da Fazenda Pública", r"JUIZADO ESPECIAL DA FAZENDA|JUIZADO DA FAZENDA|FAZENDA P[ÚU]BLICA.{0,60}JUIZADO"),
+    ("Juizado Especial", r"JUIZADO ESPECIAL|UNIDADE JURISDICIONAL"),
     ("Tribunal (2º grau)", r"DESEMBARGADOR|TRIBUNAL DE JUSTI[ÇC]A"),
     ("Justiça Estadual (1º grau)", r"JU[IÍ]Z(?:A)? DE DIREITO|VARA C[ÍI]VEL|VARA DE FAM[ÍI]LIA|COMARCA DE"),
 ]
@@ -198,6 +202,8 @@ def demo():
                                                  "CICLANO vem propor AÇÃO DE COBRANÇA", "I. DOS FATOS"] + miolo + assin,
         "Clientes/Civ/D/jec.docx": ["EXCELENTÍSSIMO SENHOR JUIZ DE DIREITO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE ITABIRA/MG",
                                     "FULANO vem propor AÇÃO DE INDENIZAÇÃO"] + miolo + assin,
+        "Clientes/Faz/E/inicial.docx": ["AO", "JUÍZO DO JUIZADO ESPECIAL DA FAZENDA PÚBLICA DA COMARCA DE ITABIRA/MG",
+                                        "FULANO vem propor AÇÃO DE COBRANÇA em face do ESTADO DE MINAS GERAIS"] + miolo + assin,
         "Modelos/procuracao.docx": ["PROCURAÇÃO", "Outorgante: X"] + miolo,
         "Clientes/Civ/C/contestacao do reu.docx": ["EXCELENTÍSSIMO SENHOR JUIZ DE DIREITO DA COMARCA DE BELO HORIZONTE/MG",
                                                   "O RÉU vem apresentar CONTESTAÇÃO"] + miolo + ["Advogado do réu, OAB/SP 999.999"],
@@ -213,18 +219,19 @@ def demo():
         assert alheias == 1, "peca do advogado do reu tem que ficar fora"
         assert "Belo Horizonte" not in c["comarca"]
         assert c["justica"]["Juizado Especial"] == 1, "Juizado tem prazo proprio: nao pode virar Justica Estadual"
-        assert len(pecas) == 4, f"devia reconhecer 4 pecas, achou {len(pecas)} (procuracao nao e peca; Pessoal pula)"
+        assert c["justica"]["Juizado Especial da Fazenda Pública"] == 1, "'AO JUÍZO' em duas linhas e Juizado da Fazenda (prazo proprio)"
+        assert len(pecas) == 5, f"devia reconhecer 5 pecas, achou {len(pecas)} (procuracao nao e peca; Pessoal pula)"
         assert c["tipo"]["Reclamação trabalhista"] == 1 and c["tipo"]["Contestação"] == 1
-        assert c["tipo"]["Petição inicial (ação)"] == 2, "peca com nome de arquivo qualquer tem que ser lida pelo conteudo"
-        assert c["comarca"]["Timóteo"] == 2 and c["comarca"]["Itabira"] == 2, dict(c["comarca"])
-        assert c["oab"]["OAB/MG 123456"] == 4
+        assert c["tipo"]["Petição inicial (ação)"] == 3, "peca com nome de arquivo qualquer tem que ser lida pelo conteudo"
+        assert c["comarca"]["Timóteo"] == 2 and c["comarca"]["Itabira"] == 3, dict(c["comarca"])
+        assert c["oab"]["OAB/MG 123456"] == 5
         assert c["justica"]["Justiça do Trabalho"] == 1
         assert c["secao"]["DOS FATOS"] == 3
-        assert c["formula"]["devida vênia"] == 4 and c["formula"]["pede deferimento"] == 4
+        assert c["formula"]["devida vênia"] == 5 and c["formula"]["pede deferimento"] == 5
         assert ileg == 1, "o docx vazio conta como ilegivel"
         rel = relatorio(Path(d), "123456")
         assert "FULANO" not in rel and "BELTRANA" not in rel and "CICLANO" not in rel, "nome de parte vazou"
-        assert len(amostra(pecas)) == 4
+        assert len(amostra(pecas)) == 5  # um tipo de cada, depois completa ate 5
     assert candidato("Peça.docx") and candidato("Contestação final.pdf") and candidato("RECURSO INOMINADO.PDF")
     assert not candidato("RG.pdf") and not candidato("Contracheque 2024.pdf") and not candidato("~$rascunho.docx")
     print("demo ok")
