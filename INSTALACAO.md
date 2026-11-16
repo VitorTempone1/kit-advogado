@@ -6,7 +6,7 @@ Cada passo tem **uma única ação** e diz **o que você tem que ver na tela** p
 certo. Se o que apareceu na sua tela for diferente do que está escrito aqui, pare e chame no
 WhatsApp da mentoria. Não tente adivinhar.
 
-> **Esta instalação é feita junto com o mentor, na Sessão 0.** É ele quem te entrega o
+> **Esta instalação é feita junto com o mentor, na Aula 0.** É ele quem te entrega o
 > endereço do Conector DJEN, no fim. Não é para ser feita sozinho na primeira vez.
 
 ---

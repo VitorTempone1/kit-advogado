@@ -119,6 +119,9 @@ primeira. Se a sua não estiver em nenhuma, escolha *Outra* e escreva."
 
 `multiSelect`. "E alguma destas também? Se nenhuma, escolha *Outra* e escreva 'nenhuma'."
 
+**Resposta vazia aqui quer dizer "nenhuma".** Anote e siga, sem perguntar de novo: no teste de
+16/11 a tela voltou vazia duas vezes, porque o advogado não marcou nada e passou adiante.
+
 | Opção | Como explicar |
 |---|---|
 | Criminal | Defesa, inquérito, habeas corpus, execução penal |
@@ -265,6 +268,11 @@ Destino é uma frente (a que a tabela usa entra marcada no Bloco E). Linha sem c
 vai pra `_triagem/`: **o setup nunca chuta.** A linha do pessoal é **obrigatória**, mesmo sem nada
 achado; pessoal não migra nem é apontado.
 
+**Bloco grande com cara de caso antigo** ("Arquivo morto", "Antigos", "Encerrados", pasta de ano
+sem cliente dentro): não mande direto pra `_triagem/`. Pergunte na tabela: "isso é caso encerrado?
+Vai pra `clientes/arquivo morto/`, sem reorganizar por dentro". Sim: vai pra lá. Não ou dúvida:
+`_triagem/`. Triagem com milhares de arquivos ninguém decide (teste de 16/11: 7.000 PDFs).
+
 ### 7. Como seguir
 
 `AskUserQuestion`: "Como quer seguir?"
@@ -325,19 +333,22 @@ só atrapalha." A descrição de cada opção é o exemplo:
 | Financeiro | `financeiro/` | "Cruzo o extrato com os processos e te digo qual honorário de êxito ou alvará ainda não caiu" |
 | Instagram e marca | `marketing/` | "Transformo uma decisão favorável num carrossel, conferido com o Provimento 205" |
 | Atendimento e comercial | `atendimento/` | "Transcrevo a consulta e devolvo o briefing e a proposta de honorários" |
-| Administrativo | `administrativo/` | "Te aviso quando a certidão ou a anuidade estiver vencendo" |
+| Administrativo | `administrativo/` | "Monto a lista de vencimentos (anuidade, certidões) e, sempre que você me abrir, te digo o que está perto de vencer" |
 | Estudo e teses | `teses/` | "Guardo cada pesquisa de jurisprudência pra reaproveitar no próximo caso igual" |
 
 - **Nunca prometa ferramenta que o kit não tem.** Diga "posso te ajudar com", nunca "tenho a
   ferramenta". Só Casos, Modelos (redação), Atendimento (transcrição) e Instagram (`post-instagram`) têm skill pronta hoje; nas
   outras o Claude ajuda conversando, com o contexto da pasta.
+- **Nunca prometa aviso, lembrete ou "eu te aviso".** O Claude só age quando o advogado o abre;
+  não roda sozinho, não manda mensagem, não vigia data. Promessa de aviso é a que mais quebra a
+  confiança, porque o advogado fica esperando um alerta que nunca chega.
 - **Uma frase opcional por frente criada**, em texto, uma por vez: "Em uma frase, como funciona
   hoje? Pode pular." (Ex.: "cobro 30% no êxito e R$ 1.000 de entrada".) Vai pro `AGENTS.md` da
   frente. Pulou: a pasta nasce com "conte aqui como funciona".
 - **Financeiro**, ao criar, uma frase: "aqui vai dado sensível; esta pasta não é git e não
   sincroniza com a JurisLabs."
-- **Personalização é oferta, não execução.** A leitura achou peças dele: "na Sessão 0 eu aprendo
-  a escrever como você". Achou logo ou posts: "e a postar com a sua cara". Não crie
+- **Personalização é oferta, não execução.** A leitura achou peças dele: "num próximo encontro eu
+  aprendo a escrever como você". Achou logo ou posts: "e a postar com a sua cara". Não crie
   `estilo-de-escrita.md` nem `marca.md`; só registre a oferta em `_contexto/escritorio.md`, com a
   pasta onde o material está.
 
@@ -455,7 +466,7 @@ sistema carreguem junto). Já existe com outro conteúdo: mostre e pergunte ante
 **`escritorio.md`** abre com: "O perfil que vale é o `AGENTS.md` da raiz. Aqui fica o registro da entrevista." Depois:
 data do setup; as respostas do A e do C como vieram; tribunal e comarca; Conector; onde estava a
 pasta antiga, se é nuvem, outro disco, e o modo escolhido; o resumo da leitura (sem nome de
-cliente); os campos `<a preencher>`; e a seção **Personalização (oferta para a Sessão 0)** com o
+cliente); os campos `<a preencher>`; e a seção **Personalização (oferta para um próximo encontro)** com o
 que foi achado e onde (peças, logo, posts), ou "nada achado".
 
 **`pastas.md`**: uma linha por bloco da tabela, `origem → destino`, com o modo (movido, copiado,
