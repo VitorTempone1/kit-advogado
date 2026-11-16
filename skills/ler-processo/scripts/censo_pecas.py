@@ -7,7 +7,7 @@
 Le o comeco e o fim de cada .docx e .pdf com texto, reconhece peca pelo CONTEUDO (a primeira
 linha enderecada ao juiz), nunca pelo nome do arquivo, e devolve SO CONTAGENS: tipos de peca,
 justica, comarcas, assinaturas, titulos de secao, formulas e fecho. Nenhum nome de parte,
-CPF ou numero de processo sai daqui. No fim, sugere ate 5 pecas para ler o estilo.
+CPF ou numero de processo sai daqui. No fim, sugere ate 5 pecas para ler o estilo (--amostra N, ate 10).
 
   uv run censo_pecas.py "<pasta>" --oab 123456   # so as pecas assinadas por esta OAB entram
   uv run censo_pecas.py --demo        # autoteste, sem pasta
@@ -166,7 +166,7 @@ def amostra(pecas, n=5):
     return out
 
 
-def relatorio(pasta: Path, oab: str = "") -> str:
+def relatorio(pasta: Path, oab: str = "", n: int = 5) -> str:
     arqs, ileg, pecas, c, alheias = censo(pasta, oab)
     L = [f"Arquivos olhados (.docx, e .pdf com nome de peça): {arqs} · peças reconhecidas: {len(pecas)} · "
          f"sem texto ou ilegíveis (escaneado, .doc antigo): {ileg}"]
@@ -184,7 +184,7 @@ def relatorio(pasta: Path, oab: str = "") -> str:
     bloco("Fórmulas (nº de peças em que aparecem)", c["formula"])
     bloco("Fecho", c["fecho"], 3)
     L.append("\nPara ler o estilo (as mais recentes, um tipo de cada):")
-    L.extend(f"  {a}" for a in amostra(pecas))
+    L.extend(f"  {a}" for a in amostra(pecas, n))
     return "\n".join(L)
 
 
@@ -232,6 +232,7 @@ def demo():
         rel = relatorio(Path(d), "123456")
         assert "FULANO" not in rel and "BELTRANA" not in rel and "CICLANO" not in rel, "nome de parte vazou"
         assert len(amostra(pecas)) == 5  # um tipo de cada, depois completa ate 5
+        assert len(amostra(pecas, 3)) == 3 and len(amostra(pecas, 10)) == 5  # nunca inventa peca que nao existe
     assert candidato("Peça.docx") and candidato("Contestação final.pdf") and candidato("RECURSO INOMINADO.PDF")
     assert not candidato("RG.pdf") and not candidato("Contracheque 2024.pdf") and not candidato("~$rascunho.docx")
     print("demo ok")
@@ -242,6 +243,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("pasta", nargs="?")
     ap.add_argument("--oab", default="", help="numero da OAB do advogado, so digitos")
+    ap.add_argument("--amostra", type=int, default=5, help="quantas pecas sugerir para ler o estilo (1 a 10)")
     ap.add_argument("--demo", action="store_true")
     a = ap.parse_args()
     if a.demo or not a.pasta:
@@ -250,4 +252,4 @@ if __name__ == "__main__":
         print("Pasta não encontrada:", a.pasta)
         sys.exit(1)
     else:
-        print(relatorio(Path(a.pasta), re.sub(r"\D", "", a.oab)))
+        print(relatorio(Path(a.pasta), re.sub(r"\D", "", a.oab), max(1, min(a.amostra, 10))))

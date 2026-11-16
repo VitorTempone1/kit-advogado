@@ -297,25 +297,29 @@ Daqui pra frente é idêntico nos dois sistemas.
 > **Não falta nada.** O Passo 6 é "instale o uv", e no Windows ele já foi instalado
 > junto com o git, lá no Passo 3.
 
-## Passo 7. Vá para a pasta Documentos
+## Passo 7. Vá para a sua pasta de usuário
 
-O sistema vai morar numa pasta nova chamada `JurisLabs`, dentro de `Documentos`. É a pasta do seu
-escritório daqui pra frente. A pasta que você já usa hoje **não é tocada** nesta instalação: o
+O sistema vai morar numa pasta nova chamada `JurisLabs`, dentro da sua **pasta de usuário** (a
+que tem o seu nome: `C:\Users\<você>` no Windows, a casinha com o seu nome no Mac). É a pasta do
+seu escritório daqui pra frente. A pasta que você já usa hoje **não é tocada** nesta instalação: o
 `/setup` pergunta por ela depois, e só mexe nela com a sua aprovação.
 
 **Mac:**
 ```
-cd ~/Documents
+cd ~
 ```
 
 **Windows:**
 ```
-cd ([Environment]::GetFolderPath('MyDocuments'))
+cd $env:USERPROFILE
 ```
 
-Copie a linha exatamente assim, **mesmo com o computador em português**. A pasta que você vê
-como "Documentos" se chama `Documents` por baixo; o nome em português é só o que a tela mostra.
-No Windows, a linha acima acha a pasta certa até quando ela está dentro do OneDrive.
+Copie a linha exatamente assim, **mesmo com o computador em português**.
+
+> **Por que não em Documentos?** No Windows, a pasta Documentos quase sempre sincroniza com o
+> OneDrive; no Mac, muitas vezes com o iCloud. Tudo o que entra nela, inclusive documento de
+> cliente, sobe pra nuvem. A pasta de usuário não sincroniza, e o seu escritório fica só no seu
+> computador.
 
 **O que você vai ver:** nada, só o cursor numa linha nova mostrando a pasta. No terminal,
 silêncio quer dizer que deu certo.
@@ -466,7 +470,7 @@ consegue ligar de novo — é a sua chave.
 
 - [ ] Plano **Pro** (ou maior) na conta Claude
 - [ ] `claude --version`, `git --version` e `uv --version` respondendo com número de versão
-- [ ] Pasta `JurisLabs` criada em Documentos, com o kit dentro dela na `.claude`
+- [ ] Pasta `JurisLabs` criada na sua pasta de usuário (fora de Documentos), com o kit dentro dela na `.claude`
 - [ ] Claude aberto na pasta `JurisLabs`, e você respondeu **sim** ao "confia nesta pasta?"
 - [ ] Conector DJEN ligado, aparecendo em `/mcp` como **connected** com **5 ferramentas**
 - [ ] `/setup` rodado até o fim, com o perfil gravado e a pasta `JurisLabs` organizada

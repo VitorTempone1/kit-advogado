@@ -61,7 +61,7 @@ o que não conseguiram buscar.
 ## O que tem aqui dentro
 
 Este repositório é baixado **como a pasta `.claude`** de uma pasta nova do seu escritório, a
-`JurisLabs`, em `Documentos`. O Claude abre na `JurisLabs` e enxerga tudo junto:
+`JurisLabs`, na sua pasta de usuário (fora de Documentos, que costuma sincronizar com OneDrive ou iCloud). O Claude abre na `JurisLabs` e enxerga tudo junto:
 
 ```
 JurisLabs/               a pasta do seu escritório. O Claude abre AQUI

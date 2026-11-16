@@ -25,16 +25,26 @@ atualizado por `git pull`.
 Pasta primeiro, entrevista depois: o que a pasta responde, o setup **confirma** em vez de perguntar.
 
 **Bloco 0 → A → B → D (passos 1 a 4b: achar a pasta, ler a estrutura e as peças) → C (confirmar a
-prática) → D (passos 5 a 8: tabela e migração) → E → Confirmação → gravar → F.**
+prática) → D (passos 5 a 8: proposta de migração e cópia) → E → Confirmação → gravar → F.**
 
 Começou do zero (sem pasta antiga) ou recusou a leitura das peças: o Bloco C roda com as perguntas
 completas, como antes.
 
 ## Regras de toda a entrevista
 
-- Uma pergunta por vez. Espere a resposta antes da próxima.
+- Uma pergunta por vez. Espere a resposta antes da próxima. **Nunca duas perguntas na mesma
+  mensagem**, nem numeradas ("1. ... 2. ..."): ele responde uma e a outra se perde (teste de 16/11:
+  a do pessoal e a dos destinos com `?` vieram juntas, e só uma foi respondida).
 - Menu (`AskUserQuestion`) com no máximo 4 opções. Toda pergunta aceita *Outra*: diga no
   enunciado o que fazer se nenhuma servir.
+- **Opção se chama pelo nome, nunca por letra ou número.** Resposta que não dá pra ler com
+  certeza ("C", "a segunda", "essas") não vale: repita o que entendeu pelo nome e pergunte se é isso.
+- **Menu recusado não é resposta.** Se o `AskUserQuestion` voltar recusado ou fechado (no Windows
+  isso já aconteceu numa pergunta de várias escolhas que o advogado tinha marcado), refaça a mesma
+  pergunta **uma vez, em texto**, com as opções escritas na frase. Não siga adiante sem ela.
+- **Nada de tabela larga na tela.** O terminal do advogado pode ser estreito, e tabela larga
+  quebra ou sai cortada. Prefira lista, uma linha por item. Tabela, só com colunas curtas
+  (até umas 80 letras por linha, somando tudo).
 - Cada opção explica o **trade-off em linguagem de advogado**. Errado: "modo verboso". Certo: "eu
   escrevo mais longo e você corta o que sobrar". Sigla, só explicada em meia linha.
 - Nome, OAB e caminho de pasta são **texto livre**, sem menu.
@@ -102,9 +112,30 @@ Antes de seguir, as travas. Falhou uma: pare, explique em uma frase e não crie 
    qualquer projeto de código e abra de novo." O `.claude/` **é** repositório, e isso é o certo:
    o git procura para cima, nunca para dentro, então ele não afeta a resposta da raiz.
 3. **Nunca `git init`**, nem pra "consertar" a trava 2.
-4. **A pasta está dentro de OneDrive, iCloud, Google Drive ou Dropbox?** (No Windows, a pasta
-   Documentos costuma ser do OneDrive.) Não trava, mas anote: o perfil vai dizer onde o dado mora
-   em vez de prometer que não sai da máquina.
+4. **A pasta está dentro de OneDrive, iCloud, Google Drive ou Dropbox?** Confira pelo caminho
+   (`OneDrive`, `iCloud`, `Mobile Documents`, `Google Drive`, `GoogleDrive`, `Dropbox`) e, no
+   Windows, também se ele começa com o valor de `$env:OneDrive`. No Windows, a pasta Documentos
+   costuma ser do OneDrive; no Mac, a Documentos pode estar no iCloud.
+
+   Está: **pergunte agora, antes da entrevista**, enquanto a pasta ainda está vazia e mudar de
+   lugar não custa nada. No teste de 16/11 o escritório nasceu dentro do OneDrive e 10 GB de dado
+   de cliente subiram pra nuvem. `AskUserQuestion`: "O seu escritório está numa pasta que
+   sincroniza com o <OneDrive / iCloud / ...>. Tudo o que entrar aqui, inclusive documento de
+   cliente, vai subir pra essa conta. Quer mudar de lugar antes de começar?"
+
+   | Opção | Como explicar |
+   |---|---|
+   | Mudar de lugar (recomendado) | Eu te passo um comando de uma linha, você roda e abre o Claude de novo. Leva um minuto |
+   | Seguir aqui mesmo | Funciona igual; o perfil vai dizer que o dado também fica na nuvem |
+
+   **Mudar de lugar:** o Claude não move a pasta em que está aberto. Diga pra ele sair com `/exit`
+   e rodar, no terminal, um comando por vez:
+   - Windows: `cd $env:USERPROFILE` e depois `Move-Item -LiteralPath "<caminho da pasta aberta>" -Destination .`
+   - Mac: `cd ~` e depois `mv "<caminho da pasta aberta>" .`
+
+   Depois, `cd <nome da pasta>`, `claude` e `/setup` de novo. Pare aqui e não crie nada.
+   **Seguir aqui mesmo:** anote; o perfil diz onde o dado mora em vez de prometer que não sai da
+   máquina, e na pergunta "Como seguir?" do Bloco D a opção recomendada passa a ser "Só apontar".
 
 ## Bloco C: a prática
 
@@ -129,6 +160,9 @@ Regras da tela:
   regimes abaixo, nunca da sua leitura.
 - Item que a leitura **não** respondeu não entra na tela com chute: vira pergunta depois, das de
   baixo, uma por vez. Sistemas (PJe, eproc...) e equipe quase nunca aparecem na peça: pergunte.
+  Os **sistemas** vão **em texto**, não em menu de várias escolhas: "Em quais sistemas você
+  peticiona? (PJe, eproc, e-SAJ, Projudi, outro)". No teste de 16/11, no Windows, esse menu voltou
+  recusado mesmo com as opções marcadas.
 - Comarca: se as peças mostram várias, diga "várias comarcas" e registre a regra de perguntar a
   comarca a cada prazo.
 
@@ -272,7 +306,7 @@ Anote também, sem abrir nada: compactados (`.zip`, `.rar`, `.7z`); arquivos mar
 nuvem"; PDFs com nome de digitalização ("scan", "digitalizado", "img_"); pasta com cara de
 modelos ou peças (`.docx` com nome de peça); pasta com cara de marca (logo, posts, `.png`, `.psd`,
 `.ai`); pasta com cara de pessoal (fotos de família, documentos pessoais). Isso alimenta a
-tabela, a oferta do Bloco E e os avisos, uma frase cada, só quando for o caso: compactados ficam
+proposta de migração, a oferta do Bloco E e os avisos, uma frase cada, só quando for o caso: compactados ficam
 como estão e o Claude não enxerga dentro; arquivo "só na nuvem" precisa estar baixado antes, senão
 a cópia sai vazia; PDF escaneado precisa de leitura de imagem, que é a skill `ler-processo`.
 
@@ -285,22 +319,27 @@ financeiro."
 ### 4b. Leitura das peças (com licença)
 
 Duas etapas: um **censo de todas as peças**, feito por um programa na máquina dele, e a **leitura
-de 5** pelo Claude, pra aprender o estilo.
+de algumas de perto** (5, ou até 10 se ele liberar mais) pelo Claude, pra aprender o estilo.
 
 Achou `.docx` ou `.pdf` na leitura? Peça licença com `AskUserQuestion`:
 
 > "Posso ler as suas peças pra aprender como você trabalha e escreve? Funciona assim: um programa
 > aqui no seu computador passa por **todas** elas e me devolve só os números (que peças você mais
-> faz, em que comarcas, como você abre e fecha). O texto delas não vem pra mim. Depois eu leio 5,
-> pra pegar o seu estilo. Nada de cliente (nome, CPF, processo) vai pro seu perfil."
+> faz, em que comarcas, como você abre e fecha). O texto delas não vem pra mim. Depois eu leio
+> umas 5 de perto, de tipos diferentes, pra pegar o seu estilo. Nada de cliente (nome, CPF,
+> processo) vai pro seu perfil."
 
-Opções: **Pode ler** · **Prefiro responder às perguntas** (pule pro Bloco C, perguntas completas).
+Opções: **Pode ler** · **Pode ler mais, se ajudar** (leio até 10) · **Prefiro responder às
+perguntas** (pule pro Bloco C, perguntas completas). Resposta em *Outra* que libera mais ("pode
+ler até mais de 5") vale como **Pode ler mais**.
 Não achou nenhum `.docx` nem `.pdf`: pule este passo sem comentar.
 
 **Etapa 1, o censo de todas.** Rode, com a OAB que ele deu no Bloco A (só os dígitos):
 
 - Mac: `uv run ".claude/skills/ler-processo/scripts/censo_pecas.py" "<pasta antiga>" --oab <número>`
 - Windows: `uv run ".claude\skills\ler-processo\scripts\censo_pecas.py" "<pasta antiga>" --oab <número>`
+
+Liberou ler mais: acrescente `--amostra 10` (o censo sugere até 10, um tipo de cada antes de repetir).
 
 Pasta grande pode levar alguns minutos: avise antes ("vou passar por todas as suas peças, pode
 levar uns minutos"). O programa reconhece peça pelo CONTEÚDO (a primeira linha endereçada ao juiz),
@@ -312,7 +351,10 @@ comarcas, assinatura, títulos de seção, fórmulas, fecho, e no fim até 5 pe�
   outro estado, suplementar) e rode de novo com ela. Continua zero: pule pro Bloco C completo.
 - **Muitas ilegíveis** (escaneado, `.doc` antigo): diga em uma frase quantas, sem travar.
 
-**Etapa 2, a leitura de 5.** Abra as peças que o censo sugeriu (as mais recentes, um tipo de cada).
+**Etapa 2, a leitura de perto.** Abra **todas** as peças que o censo sugeriu (as mais recentes, um
+tipo de cada), nem mais nem menos. Uma não abriu, era cópia de outra ou não era dele: pule e diga
+no fecho quantas leu e por quê ("li 4; a quinta era cópia de outra"). O número prometido e o lido
+têm que bater ou ser explicados (teste de 16/11: prometeu 5, leu 4, sem dizer por quê).
 Só o começo e o fim, que é onde estão o endereçamento e a assinatura:
 - `.docx`: `uv run ".claude/skills/ler-processo/scripts/texto_docx.py" "<arquivo>"` (Windows: barras
   invertidas). Devolve os 4.000 primeiros e os 1.500 últimos caracteres.
@@ -348,24 +390,39 @@ me corrige em uma frase) · **Prefiro por cliente** (reorganização grande: hoj
 registro a preferência; caso novo já nasce por cliente, o antigo a gente reorganiza depois, com
 calma). A resposta (e o kit de documentos padrão) vai pro `AGENTS.md` de `clientes/`.
 
-### 6. A tabela
+### 6. A proposta de migração
 
 Uma linha por **bloco de topo** (cerca de 20 linhas no máximo; bloco pequeno e parecido se
-agrupa). Nunca uma linha por arquivo.
+agrupa). Nunca uma linha por arquivo. **Em lista, não em tabela:** no teste de 16/11 a tabela, com
+a descrição dentro da primeira coluna, passou de 150 letras de largura e saiu cortada no meio.
+Formato, uma linha por bloco, com o nome da pasta, a quantidade, o destino e `?` quando não há certeza:
 
-| Hoje | Arquivos | Vai para | Certeza |
-|---|---|---|---|
-| `CLIENTES/` | 20.140 | `clientes/` (mesma organização) | sim |
-| `Modelos/` | 312 | `modelos/` | sim |
-| `Diversos/` | 88 | `_triagem/` | `?` |
-| **Tem algo aqui que é pessoal?** (fotos, documentos da família) | | fica **fora** do sistema | ele diz |
+```
+CLIENTES (19.657)          → Casos, mesma organização
+WORD (42)                  → Modelos de peça
+PLANILHAS (556)            → triagem  ?
+HF ACLTA (83)              → triagem  ?
+```
 
-Destino é uma frente (a que a tabela usa entra marcada no Bloco E). Linha sem certeza leva `?` e
-vai pra `_triagem/`: **o setup nunca chuta.** A linha do pessoal é **obrigatória**, mesmo sem nada
-achado; pessoal não migra nem é apontado.
+Se precisar dizer o que tem num bloco, meia linha logo abaixo dele, recuada. Destino é uma frente
+(a que a lista usa entra marcada no Bloco E). Linha sem certeza leva `?` e vai pra `_triagem/`:
+**o setup nunca chuta.** Depois da lista, **uma** pergunta só, em texto: "Algum destino com `?` você
+já sabe onde vai? Se não souber, fica na triagem."
+
+### 6b. O pessoal (obrigatória, sozinha)
+
+Sempre, mesmo sem nada achado, e **em mensagem própria**, depois da resposta sobre os `?`.
+Pessoal não migra nem é apontado. `AskUserQuestion`:
+
+- Achou pasta com cara de pessoal: "A pasta `<nome>` (<N> arquivos) parece pessoal. O que faço
+  com ela?" Opções: **Fica fora** (não entra no sistema; continua só onde está) · **Vai pra
+  triagem** · **É do escritório, migra normal**. Mais de uma: uma pergunta por pasta, ou uma só
+  listando todas, se ele quiser decidir junto.
+- Não achou nada: "Tem alguma coisa pessoal nessa pasta que eu não vi (fotos, documentos da
+  família)? Se tiver, me diga o nome que ela fica fora."
 
 **Bloco grande com cara de caso antigo** ("Arquivo morto", "Antigos", "Encerrados", pasta de ano
-sem cliente dentro): não mande direto pra `_triagem/`. Pergunte na tabela: "isso é caso encerrado?
+sem cliente dentro): não mande direto pra `_triagem/`. Pergunte junto com os `?`: "isso é caso encerrado?
 Vai pra `clientes/arquivo morto/`, sem reorganizar por dentro". Sim: vai pra lá. Não ou dúvida:
 `_triagem/`. Triagem com milhares de arquivos ninguém decide (teste de 16/11: 7.000 PDFs).
 
@@ -373,7 +430,7 @@ Vai pra `clientes/arquivo morto/`, sem reorganizar por dentro". Sim: vai pra lá
 
 **Esta pergunta nunca se pula e nunca se junta com outra** (nem com a do pessoal, nem com a dos
 destinos com `?`). Resposta genérica dada antes ("pode seguir", "pode tocar de acordo com sua
-leitura", "faz como achar melhor") **não é escolha**: ela aprova os destinos da tabela, não o modo.
+leitura", "faz como achar melhor") **não é escolha**: ela aprova os destinos da proposta, não o modo.
 Mover ou copiar só acontece depois que ele escolher uma das opções abaixo. No teste de 16/11 o
 setup pulou esta pergunta e copiou 10 GB de dado real de cliente sem o advogado escolher.
 
@@ -383,6 +440,11 @@ Antes de perguntar, meça o tamanho da pasta antiga:
 
 Quando o modo for copiar, diga o tamanho no enunciado: "copiar vai ocupar <N> GB no seu computador;
 o original fica onde está". Passou de 5 GB: diga também que "só apontar" não ocupa nada.
+
+**O escritório ficou na nuvem (Bloco B, trava 4) e o modo seria copiar:** ponha **Só apontar**
+como primeira opção, marcada "(recomendado)", e diga no enunciado quanto vai subir pra nuvem:
+"copiar vai mandar <N> GB de documento de cliente pro seu <OneDrive>". Ele ainda pode escolher
+copiar; a escolha é dele, o aviso é seu.
 
 `AskUserQuestion`: "Como quer seguir?"
 
@@ -397,7 +459,7 @@ apaga é ele, quando quiser.
 
 ### 8. Aplicar (depois da Confirmação)
 
-A tabela aprovada espera a **Confirmação**, porque as pastas de destino nascem lá. Depois do sim:
+A proposta aprovada espera a **Confirmação**, porque as pastas de destino nascem lá. Depois do sim:
 
 **Só apontar.** Grave a pasta antiga em `.claude/settings.local.json`, em
 `permissions.additionalDirectories` (lista de caminhos absolutos). Arquivo já existe: acrescente
@@ -425,14 +487,25 @@ registro.
 ## Bloco E: as frentes
 
 Pergunta pela **necessidade**, não pela pasta. `clientes/` nasce sempre (as skills do kit usam):
-apresente Casos como certo, com o exemplo, e as frentes que a leitura achou (ou que a tabela do D
+apresente Casos como certo, com o exemplo, e as frentes que a leitura achou (ou que a proposta do D
 usa) como **já confirmadas**, numa frase: "Na sua pasta achei casos, modelos e financeiro; esses
 já entram."
 
 As que sobram vão em `AskUserQuestion` com `multiSelect`, no máximo 4 por tela (duas telas;
 sobrou uma só, pergunte em texto). Enunciado: "Em quais destas frentes você quer ajuda? Quanto
 mais contexto eu tenho, melhor eu te ajudo. Pode não marcar nenhuma: pasta vazia que ninguém usa
-só atrapalha." A descrição de cada opção é o exemplo:
+só atrapalha." O rótulo de cada opção é o **nome da frente**; a descrição é o exemplo.
+
+**Só nasce a frente que ele marcou pelo nome** (mais `clientes/` e as que já vieram da pasta
+antiga). Resposta ambígua ("C", "todas menos uma", resposta em *Outra* que não nomeia a frente):
+não interprete; repita as frentes pelo nome e pergunte se é isso. Menu recusado ou voltou vazio:
+"nenhuma", e só as já confirmadas nascem. No teste de 16/11 a resposta veio como "C" e nasceram
+quatro frentes vazias (contratos, financeiro, administrativo, teses) que ninguém confirmou.
+
+Antes da Confirmação, repita pelo nome, numa frase: "Vão nascer: Casos, Modelos de peça,
+Atendimento e Instagram. Confere?"
+
+| Frente | Pasta | Exemplo (descrição da opção) |
 
 | Frente | Pasta | Exemplo (descrição da opção) |
 |---|---|---|
@@ -591,7 +664,7 @@ que ele repete) · **Citações** (como cita lei e julgado) · **Pedidos** (como
 Cada seção com o padrão e, quando ajudar, uma fórmula genérica de exemplo. **Nenhum nome de
 parte, CPF, processo, valor ou fato de caso.** Antes de gravar, releia procurando isso.
 
-**`pastas.md`**: uma linha por bloco da tabela, `origem → destino`, com o modo (movido, copiado,
+**`pastas.md`**: uma linha por bloco da proposta, `origem → destino`, com o modo (movido, copiado,
 apontado, ficou fora por ser pessoal, triagem). Sem pasta antiga: "começou do zero em <data>".
 
 **`_memoria/decisoes.md`**: título `# Decisões do escritório`, a frase "uma linha por decisão, com
@@ -616,7 +689,9 @@ Antes do mapa, faça **uma** tarefa real, ali na frente dele. É o que ele lembr
 ### Depois, o mapa
 
 Nada de "configurado". Mostre o **mapa do escritório**: uma linha por frente montada, com uma
-tarefa pronta pra testar **agora**, tirada da área dele. Exemplos pra Casos, por área:
+tarefa pronta pra testar **agora**, tirada da área dele. **Em lista, não em tabela** (regra da
+tela estreita): o nome da frente em negrito e a tarefa logo depois, na mesma linha. Exemplos pra
+Casos, por área:
 
 | Área | Tarefa pra testar |
 |---|---|
