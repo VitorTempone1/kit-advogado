@@ -284,29 +284,43 @@ financeiro."
 
 ### 4b. Leitura das peças (com licença)
 
-Achou peça na leitura (`.docx` ou `.pdf` com nome de peça: inicial, contestação, réplica, recurso,
-apelação, agravo, manifestação, defesa, impugnação, ou uma pasta de modelos)? Peça licença com
-`AskUserQuestion`:
+Duas etapas: um **censo de todas as peças**, feito por um programa na máquina dele, e a **leitura
+de 5** pelo Claude, pra aprender o estilo.
 
-> "Achei peças suas na pasta. Posso abrir até 5 delas pra aprender como você escreve e já
-> preencher o seu perfil? Assim eu te pergunto menos. O texto passa pelo Claude como em qualquer
-> conversa, e nada de cliente (nome, CPF, processo) vai pro seu perfil."
+Achou `.docx` ou `.pdf` na leitura? Peça licença com `AskUserQuestion`:
 
-Opções: **Pode abrir** · **Prefiro responder às perguntas** (pule pro Bloco C, perguntas completas).
-Não achou peça nenhuma: pule este passo sem comentar.
+> "Posso ler as suas peças pra aprender como você trabalha e escreve? Funciona assim: um programa
+> aqui no seu computador passa por **todas** elas e me devolve só os números (que peças você mais
+> faz, em que comarcas, como você abre e fecha). O texto delas não vem pra mim. Depois eu leio 5,
+> pra pegar o seu estilo. Nada de cliente (nome, CPF, processo) vai pro seu perfil."
 
-**Escolha a amostra pelo nome, nunca o lote:**
-- No máximo **5** peças. Prefira as mais recentes (data do arquivo), de **áreas diferentes**, e as
-  da pasta de modelos se houver.
-- **Nunca** abra nada de pessoal, financeiro, documento pessoal de cliente (RG, CPF, laudo,
-  extrato), áudio ou imagem. Só peça escrita pelo advogado.
-- Nada de `.doc` antigo, `.zip` ou arquivo "só na nuvem": pule e pegue outra.
+Opções: **Pode ler** · **Prefiro responder às perguntas** (pule pro Bloco C, perguntas completas).
+Não achou nenhum `.docx` nem `.pdf`: pule este passo sem comentar.
 
-**Como ler** (só o começo e o fim: é onde estão o endereçamento e a assinatura):
-- `.docx`: `uv run ".claude/skills/ler-processo/scripts/texto_docx.py" "<arquivo>"` (no Windows,
-  barras invertidas no caminho do script). Devolve os 4.000 primeiros e os 1.500 últimos caracteres.
+**Etapa 1, o censo de todas.** Rode, com a OAB que ele deu no Bloco A (só os dígitos):
+
+- Mac: `uv run ".claude/skills/ler-processo/scripts/censo_pecas.py" "<pasta antiga>" --oab <número>`
+- Windows: `uv run ".claude\skills\ler-processo\scripts\censo_pecas.py" "<pasta antiga>" --oab <número>`
+
+Pasta grande pode levar alguns minutos: avise antes ("vou passar por todas as suas peças, pode
+levar uns minutos"). O programa reconhece peça pelo CONTEÚDO (a primeira linha endereçada ao juiz),
+pula a pasta pessoal, e **deixa fora da conta a peça assinada por outra OAB** (a contestação da
+outra parte que ele baixou do PJe, peça de colega). Ele devolve: tipos de peça, onde peticiona,
+comarcas, assinatura, títulos de seção, fórmulas, fecho, e no fim até 5 peças sugeridas pra ler.
+
+- **Zero peças com a OAB dele**, mas várias com outra: pergunte se ele assina com outra OAB (de
+  outro estado, suplementar) e rode de novo com ela. Continua zero: pule pro Bloco C completo.
+- **Muitas ilegíveis** (escaneado, `.doc` antigo): diga em uma frase quantas, sem travar.
+
+**Etapa 2, a leitura de 5.** Abra as peças que o censo sugeriu (as mais recentes, um tipo de cada).
+Só o começo e o fim, que é onde estão o endereçamento e a assinatura:
+- `.docx`: `uv run ".claude/skills/ler-processo/scripts/texto_docx.py" "<arquivo>"` (Windows: barras
+  invertidas). Devolve os 4.000 primeiros e os 1.500 últimos caracteres.
 - `.pdf`: `uv run ".claude/skills/ler-processo/scripts/mapear_pdf.py" texto "<arquivo>" --paginas 1-3`
-  e a última página. PDF sem texto (escaneado): pule, não é peça dele.
+  e a última página.
+
+Nunca abra por conta própria arquivo fora da sugestão do censo: nada de pessoal, financeiro,
+documento de cliente (RG, laudo, extrato), áudio ou imagem.
 
 **O que tirar de cada peça**, e só isto:
 - **Assinatura:** nome e OAB. Se não bater com o que ele disse no Bloco A, pergunte (pode ser peça
@@ -322,7 +336,9 @@ Não achou peça nenhuma: pule este passo sem comentar.
 caso em nenhum arquivo do escritório. Do estilo, só a forma: fórmula genérica pode ("Termos em que
 pede deferimento"), trecho do caso não.
 
-Fecho do passo, em uma frase: "Li <N> peças suas. Agora te mostro o que entendi." Segue pro Bloco C.
+Fecho do passo, em uma frase: "Passei por <total> peças suas e li <N> de perto. Agora te mostro o que
+entendi." Segue pro Bloco C. Na tela de confirmação, a **peça mais frequente** e as **comarcas**
+saem dos números do censo, não da amostra de 5.
 
 ### 5. Confirma a lógica
 
