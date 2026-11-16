@@ -80,8 +80,8 @@ Conversa normal, sem menu. Abra curto:
 > perguntar menos. Responda do jeito que falaria."
 
 1. **"Qual é o seu nome completo, do jeito que você assina as peças?"**
-2. **"E o nome do escritório, como aparece nos documentos?"** (Advoga sozinho? O nome dele serve;
-   diga isso se ele hesitar.)
+2. **"E o nome do escritório, como aparece nos documentos? Se o escritório não tem nome próprio, o
+   seu nome serve."** Diga exatamente assim, sem flexionar gênero e sem comentar a escolha das palavras.
 3. **"Qual o número da sua OAB e a UF?"** Aceite do jeito que vier ("123456/MG", "MG 123.456").
    Separe número e UF e confirme repetindo: "OAB/MG 123456, certo?"
 
