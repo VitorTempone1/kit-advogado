@@ -369,7 +369,20 @@ sem cliente dentro): não mande direto pra `_triagem/`. Pergunte na tabela: "iss
 Vai pra `clientes/arquivo morto/`, sem reorganizar por dentro". Sim: vai pra lá. Não ou dúvida:
 `_triagem/`. Triagem com milhares de arquivos ninguém decide (teste de 16/11: 7.000 PDFs).
 
-### 7. Como seguir
+### 7. Como seguir (obrigatória, sozinha)
+
+**Esta pergunta nunca se pula e nunca se junta com outra** (nem com a do pessoal, nem com a dos
+destinos com `?`). Resposta genérica dada antes ("pode seguir", "pode tocar de acordo com sua
+leitura", "faz como achar melhor") **não é escolha**: ela aprova os destinos da tabela, não o modo.
+Mover ou copiar só acontece depois que ele escolher uma das opções abaixo. No teste de 16/11 o
+setup pulou esta pergunta e copiou 10 GB de dado real de cliente sem o advogado escolher.
+
+Antes de perguntar, meça o tamanho da pasta antiga:
+- Mac: `du -sh "<pasta>"`
+- Windows: `"{0:N1} GB" -f ((Get-ChildItem -LiteralPath "<pasta>" -Recurse -File -Force | Measure-Object Length -Sum).Sum / 1GB)`
+
+Quando o modo for copiar, diga o tamanho no enunciado: "copiar vai ocupar <N> GB no seu computador;
+o original fica onde está". Passou de 5 GB: diga também que "só apontar" não ocupa nada.
 
 `AskUserQuestion`: "Como quer seguir?"
 
@@ -442,6 +455,9 @@ só atrapalha." A descrição de cada opção é o exemplo:
   de 16/11 a resposta de uma caiu na pergunta da outra. A frente onde a leitura achou material
   nasce com o que a leitura viu ("veio da pasta Financeiro: recibos e extratos"); as outras nascem
   com "conte aqui como funciona". O advogado completa no uso.
+- **Pessoa que ele manda desconsiderar** (ex-sócio, ex-estagiário, colega que assinava junto): não
+  grave o nome dela em lugar nenhum (perfil, registro, decisões, estilo, vitrine). Registre só o papel:
+  "peças antigas trazem a assinatura de um ex-sócio; peça nova sai só com o advogado".
 - **Financeiro**, ao criar, uma frase: "aqui vai dado sensível; esta pasta não é git e não
   sincroniza com a JurisLabs."
 - **Estilo de escrita é entrega, quando houve leitura.** Leu peças no passo 4b: grave
