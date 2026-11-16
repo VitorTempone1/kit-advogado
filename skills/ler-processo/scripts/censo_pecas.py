@@ -30,6 +30,19 @@ try:
 except Exception:
     pass
 
+# PDF e lento de abrir e quase sempre e documento de cliente ou peca baixada do PJe:
+# so entra quando o NOME parece de peca. .docx entra sempre.
+PDF_DE_PECA = re.compile(r"inicial|peti[cç][aã]o|contesta|r[eé]plica|impugna|recurso|apela|agravo|embargo|"
+                         r"contrarraz|manifesta|memoria|alega[cç]|defesa|mandado de seg|habeas|reclama[cç]", re.I)
+
+
+def candidato(nome: str) -> bool:
+    if nome.startswith(("~$", "._")):
+        return False
+    ext = Path(nome).suffix.lower()
+    return ext == ".docx" or (ext == ".pdf" and bool(PDF_DE_PECA.search(nome)))
+
+
 PULA_PASTA = re.compile(r"pessoal|particular|\.claude|_triagem|desfazer", re.I)
 ENDERECO = re.compile(r"EXCELENT[IÍ]SSIM|SENHOR(?:A|ES)?\s+(?:DOUTOR|JUIZ|DESEMBARGADOR|MINISTRO)|"
                       r"MERIT[IÍ]SSIM|JU[IÍ]Z(?:A|ES)?\s+(?:DE DIREITO|DO TRABALHO|FEDERAL)", re.I)
@@ -99,7 +112,7 @@ def censo(pasta: Path, oab: str = ""):
         dirs[:] = [d for d in dirs if not PULA_PASTA.search(d)]
         for n in nomes:
             arq = Path(raiz) / n
-            if arq.suffix.lower() not in (".docx", ".pdf") or n.startswith(("~$", "._")):
+            if not candidato(n):
                 continue
             arqs += 1
             lido = ler(arq)
@@ -151,7 +164,7 @@ def amostra(pecas, n=5):
 
 def relatorio(pasta: Path, oab: str = "") -> str:
     arqs, ileg, pecas, c, alheias = censo(pasta, oab)
-    L = [f"Arquivos .docx/.pdf olhados: {arqs} · peças reconhecidas: {len(pecas)} · "
+    L = [f"Arquivos olhados (.docx, e .pdf com nome de peça): {arqs} · peças reconhecidas: {len(pecas)} · "
          f"sem texto ou ilegíveis (escaneado, .doc antigo): {ileg}"]
     if oab:
         L.append(f"Peças assinadas por outra OAB (parte contrária, colega), fora da conta: {alheias}")
@@ -212,6 +225,8 @@ def demo():
         rel = relatorio(Path(d), "123456")
         assert "FULANO" not in rel and "BELTRANA" not in rel and "CICLANO" not in rel, "nome de parte vazou"
         assert len(amostra(pecas)) == 4
+    assert candidato("Peça.docx") and candidato("Contestação final.pdf") and candidato("RECURSO INOMINADO.PDF")
+    assert not candidato("RG.pdf") and not candidato("Contracheque 2024.pdf") and not candidato("~$rascunho.docx")
     print("demo ok")
 
 
