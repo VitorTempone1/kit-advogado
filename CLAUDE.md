@@ -1,7 +1,7 @@
 # JurisLabs OS
 
 Este arquivo mora em `.claude/CLAUDE.md`, dentro da pasta do escritório que o Claude abriu
-(a `JurisLabs`, em `Documentos`). A pasta `.claude/` é o sistema: o kit, atualizado por
+(a `JurisLabs`, na pasta de usuário). A pasta `.claude/` é o sistema: o kit, atualizado por
 `git pull`. O resto da pasta aberta é do escritório: clientes, modelos, contexto, memória.
 A pasta do escritório não é um repositório git; só a `.claude/` é.
 
