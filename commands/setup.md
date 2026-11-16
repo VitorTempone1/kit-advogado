@@ -1,6 +1,6 @@
 ---
 name: setup
-description: 'Monta o escritório dentro do JurisLabs OS. Entrevista curta (quem é, OAB, área, regime de prazo, tribunais, peça, tom, equipe), lê só a ESTRUTURA da pasta que o advogado já tem, propõe a migração por bloco com registro de desfazer, abre as frentes de trabalho (casos, modelos, contratos, financeiro, Instagram, atendimento, administrativo, teses) e termina com uma tarefa pronta pra testar em cada uma. Use quando o advogado digitar /setup, ou disser "configurar", "primeira vez", "montar o escritório".'
+description: 'Monta o escritório dentro do JurisLabs OS. Lê primeiro a pasta que o advogado já tem (a estrutura e, com licença dele, até 5 peças, pra aprender como ele escreve), confirma o que achou em vez de perguntar tudo (área, regime de prazo, tribunal, peça, tom), propõe a migração por bloco com registro de desfazer, abre as frentes de trabalho (casos, modelos, contratos, financeiro, Instagram, atendimento, administrativo, teses) e termina com uma tarefa pronta pra testar em cada uma. Use quando o advogado digitar /setup, ou disser "configurar", "primeira vez", "montar o escritório".'
 disable-model-invocation: true
 ---
 
@@ -19,6 +19,16 @@ atualizado por `git pull`.
   git ignora). Arquivo editado ali vira conflito no próximo update, e advogado leigo parado num
   conflito é instalação morta. Tudo o mais vai para a raiz da pasta do escritório e subpastas.
 - **Nunca `git init`** na pasta do escritório nem na pasta antiga.
+
+## A ordem (v3)
+
+Pasta primeiro, entrevista depois: o que a pasta responde, o setup **confirma** em vez de perguntar.
+
+**Bloco 0 → A → B → D (passos 1 a 4b: achar a pasta, ler a estrutura e as peças) → C (confirmar a
+prática) → D (passos 5 a 8: tabela e migração) → E → Confirmação → gravar → F.**
+
+Começou do zero (sem pasta antiga) ou recusou a leitura das peças: o Bloco C roda com as perguntas
+completas, como antes.
 
 ## Regras de toda a entrevista
 
@@ -65,8 +75,9 @@ Nunca mostre erro técnico de ferramenta ausente.
 
 Conversa normal, sem menu. Abra curto:
 
-> "Vou montar o seu escritório aqui dentro. São uns 15 minutos: perguntas sobre você, uma olhada
-> nas pastas que você já tem e as frentes em que quer ajuda. Responda do jeito que falaria."
+> "Vou montar o seu escritório aqui dentro. Primeiro umas perguntas rápidas sobre você; depois eu
+> olho as pastas que você já tem e leio algumas peças suas, pra aprender como você trabalha e te
+> perguntar menos. Responda do jeito que falaria."
 
 1. **"Qual é o seu nome completo, do jeito que você assina as peças?"**
 2. **"E o nome do escritório, como aparece nos documentos?"** (Advoga sozinho? O nome dele serve;
@@ -96,6 +107,32 @@ Antes de seguir, as travas. Falhou uma: pare, explique em uma frase e não crie 
    em vez de prometer que não sai da máquina.
 
 ## Bloco C: a prática
+
+**Roda DEPOIS da leitura (Bloco D, passos 1 a 4b).**
+
+### Com a leitura feita: uma tela de confirmação
+
+Monte o que a pasta e as peças disseram e confirme num `AskUserQuestion` só. Enunciado, no
+formato: "Pelo que vi na sua pasta e nas suas peças: você atua em **<áreas>**, peticiona no
+**<tribunal>** (comarca de **<comarca>**), atende mais **<pessoa física / empresa>**, a peça que mais
+aparece é **<peça>** e você escreve num tom **<tom>**. Confere?"
+
+| Opção | O que acontece |
+|---|---|
+| Isso mesmo | Grava assim |
+| Quase | Ele corrige em uma frase; você ajusta só o que ele disse |
+| Errou bastante | Faça as perguntas completas abaixo, só das partes que ele apontar |
+
+Regras da tela:
+- **Área decide prazo**, então ela vai sempre na tela, mesmo que tenha vindo só do nome das
+  pastas. Área que a leitura não viu e ele acrescentar entra igual. O regime sai da tabela de
+  regimes abaixo, nunca da sua leitura.
+- Item que a leitura **não** respondeu não entra na tela com chute: vira pergunta depois, das de
+  baixo, uma por vez. Sistemas (PJe, eproc...) e equipe quase nunca aparecem na peça: pergunte.
+- Comarca: se as peças mostram várias, diga "várias comarcas" e registre a regra de perguntar a
+  comarca a cada prazo.
+
+### Sem leitura: as perguntas completas
 
 Sete perguntas com `AskUserQuestion`, uma por vez.
 
@@ -184,15 +221,16 @@ marcada pra revisão).
 
 ## Bloco D: suas pastas
 
-Aqui o setup **lê antes de perguntar**. Lê só a ESTRUTURA (nomes de pasta e de arquivo,
-quantidade, profundidade, extensão). **Nunca abre o conteúdo de documento de cliente.**
+Aqui o setup **lê antes de perguntar**. Nos passos 1 a 4 lê só a ESTRUTURA (nomes de pasta e de
+arquivo, quantidade, profundidade, extensão), sem abrir arquivo. O único conteúdo que ele abre é a
+amostra de peças do passo 4b, com licença do advogado.
 
 ### 1. Tem pasta?
 
 `AskUserQuestion`: "Você já tem uma pasta onde guarda os arquivos do escritório?" Opções: **Uma
 pasta principal** (eu olho a organização e proponho como trazer pra cá) · **Espalhado em várias**
 (você me diz quais, uma por vez; os passos 2 a 4 rodam pra cada uma) · **Fica na nuvem** (Drive,
-OneDrive ou Dropbox: eu copio, o original fica onde está) · **Começo do zero** (vá para o Bloco E).
+OneDrive ou Dropbox: eu copio, o original fica onde está) · **Começo do zero** (vá para o Bloco C, perguntas completas, e depois para o Bloco E).
 
 ### 2. Onde fica?
 
@@ -243,6 +281,48 @@ grosso, como os casos parecem organizados, o que está solto. Ex.: "São 21 mil 
 em CLIENTES, organizados por tipo de ação, depois por uma fase numerada, depois pelo cliente.
 Quase todo caso tem o mesmo kit de 8 documentos. Fora isso, uma pasta de modelos e outra de
 financeiro."
+
+### 4b. Leitura das peças (com licença)
+
+Achou peça na leitura (`.docx` ou `.pdf` com nome de peça: inicial, contestação, réplica, recurso,
+apelação, agravo, manifestação, defesa, impugnação, ou uma pasta de modelos)? Peça licença com
+`AskUserQuestion`:
+
+> "Achei peças suas na pasta. Posso abrir até 5 delas pra aprender como você escreve e já
+> preencher o seu perfil? Assim eu te pergunto menos. O texto passa pelo Claude como em qualquer
+> conversa, e nada de cliente (nome, CPF, processo) vai pro seu perfil."
+
+Opções: **Pode abrir** · **Prefiro responder às perguntas** (pule pro Bloco C, perguntas completas).
+Não achou peça nenhuma: pule este passo sem comentar.
+
+**Escolha a amostra pelo nome, nunca o lote:**
+- No máximo **5** peças. Prefira as mais recentes (data do arquivo), de **áreas diferentes**, e as
+  da pasta de modelos se houver.
+- **Nunca** abra nada de pessoal, financeiro, documento pessoal de cliente (RG, CPF, laudo,
+  extrato), áudio ou imagem. Só peça escrita pelo advogado.
+- Nada de `.doc` antigo, `.zip` ou arquivo "só na nuvem": pule e pegue outra.
+
+**Como ler** (só o começo e o fim: é onde estão o endereçamento e a assinatura):
+- `.docx`: `uv run ".claude/skills/ler-processo/scripts/texto_docx.py" "<arquivo>"` (no Windows,
+  barras invertidas no caminho do script). Devolve os 4.000 primeiros e os 1.500 últimos caracteres.
+- `.pdf`: `uv run ".claude/skills/ler-processo/scripts/mapear_pdf.py" texto "<arquivo>" --paginas 1-3`
+  e a última página. PDF sem texto (escaneado): pule, não é peça dele.
+
+**O que tirar de cada peça**, e só isto:
+- **Assinatura:** nome e OAB. Se não bater com o que ele disse no Bloco A, pergunte (pode ser peça
+  de colega).
+- **Endereçamento:** tribunal, vara, comarca.
+- **Assunto:** a área (cível, trabalhista, família...).
+- **Parte que ele representa:** pessoa física ou empresa.
+- **Estilo:** tamanho, como abre e fecha ("Excelentíssimo...", "Termos em que pede deferimento"),
+  títulos das seções, como cita lei e jurisprudência, fórmulas que ele repete ("data venia",
+  "com a devida vênia"), primeira ou terceira pessoa, tamanho dos parágrafos, como monta os pedidos.
+
+**Nunca guarde dado de cliente.** Nada de nome de parte, CPF, número de processo, valor ou fato do
+caso em nenhum arquivo do escritório. Do estilo, só a forma: fórmula genérica pode ("Termos em que
+pede deferimento"), trecho do caso não.
+
+Fecho do passo, em uma frase: "Li <N> peças suas. Agora te mostro o que entendi." Segue pro Bloco C.
 
 ### 5. Confirma a lógica
 
@@ -342,15 +422,16 @@ só atrapalha." A descrição de cada opção é o exemplo:
 - **Nunca prometa aviso, lembrete ou "eu te aviso".** O Claude só age quando o advogado o abre;
   não roda sozinho, não manda mensagem, não vigia data. Promessa de aviso é a que mais quebra a
   confiança, porque o advogado fica esperando um alerta que nunca chega.
-- **Uma frase opcional por frente criada**, em texto, uma por vez: "Em uma frase, como funciona
-  hoje? Pode pular." (Ex.: "cobro 30% no êxito e R$ 1.000 de entrada".) Vai pro `AGENTS.md` da
-  frente. Pulou: a pasta nasce com "conte aqui como funciona".
+- **Sem pergunta por frente.** Não pergunte "como funciona hoje" em cada frente: cansa, e no teste
+  de 16/11 a resposta de uma caiu na pergunta da outra. A frente onde a leitura achou material
+  nasce com o que a leitura viu ("veio da pasta Financeiro: recibos e extratos"); as outras nascem
+  com "conte aqui como funciona". O advogado completa no uso.
 - **Financeiro**, ao criar, uma frase: "aqui vai dado sensível; esta pasta não é git e não
   sincroniza com a JurisLabs."
-- **Personalização é oferta, não execução.** A leitura achou peças dele: "num próximo encontro eu
-  aprendo a escrever como você". Achou logo ou posts: "e a postar com a sua cara". Não crie
-  `estilo-de-escrita.md` nem `marca.md`; só registre a oferta em `_contexto/escritorio.md`, com a
-  pasta onde o material está.
+- **Estilo de escrita é entrega, quando houve leitura.** Leu peças no passo 4b: grave
+  `_contexto/estilo-de-escrita.md` (formato em "O que gravar"). A skill `redacao-juridica` já lê
+  esse arquivo antes de escrever. Achou logo ou posts: isso continua oferta ("num próximo encontro
+  eu aprendo a postar com a sua cara"), registrada em `_contexto/escritorio.md`; não crie `marca.md`.
 
 ## Confirmação
 
@@ -371,6 +452,7 @@ AGENTS.md              o perfil e as regras do escritório
 CLAUDE.md              duas linhas: @AGENTS.md e @.claude/CLAUDE.md
 _contexto/
   escritorio.md        o registro da entrevista
+  estilo-de-escrita.md só se leu peças (passo 4b): como ele escreve, sem dado de cliente
   pastas.md            o mapa: o que veio de onde, o que ficou só apontado
 _memoria/
   decisoes.md          decisão com data
@@ -430,6 +512,7 @@ Feriado forense local: conferir sempre na portaria do tribunal. É a maior fonte
 ## Como escrever
 Tom: <tom>
 Peça mais frequente: <peça>
+<leu peças:> Estilo detalhado: _contexto/estilo-de-escrita.md (aprendido de <N> peças suas).
 
 ## O sistema
 As regras do sistema estão em .claude/CLAUDE.md, que se atualiza sozinho. Não edite nada em .claude/.
@@ -469,6 +552,13 @@ pasta antiga, se é nuvem, outro disco, e o modo escolhido; o resumo da leitura 
 cliente); os campos `<a preencher>`; e a seção **Personalização (oferta para um próximo encontro)** com o
 que foi achado e onde (peças, logo, posts), ou "nada achado".
 
+**`estilo-de-escrita.md`** (só se leu peças): título `# Como <nome> escreve`, a frase "aprendido
+de <N> peças em <data>; edite à vontade" e seções curtas: **Abertura e endereçamento** · **Estrutura**
+(as seções na ordem em que ele usa) · **Linguagem** (tom, pessoa, tamanho do parágrafo, fórmulas
+que ele repete) · **Citações** (como cita lei e julgado) · **Pedidos** (como monta) · **Fecho**.
+Cada seção com o padrão e, quando ajudar, uma fórmula genérica de exemplo. **Nenhum nome de
+parte, CPF, processo, valor ou fato de caso.** Antes de gravar, releia procurando isso.
+
 **`pastas.md`**: uma linha por bloco da tabela, `origem → destino`, com o modo (movido, copiado,
 apontado, ficou fora por ser pessoal, triagem). Sem pasta antiga: "começou do zero em <data>".
 
@@ -477,6 +567,21 @@ data, a mais nova embaixo" e a primeira: `- <AAAA-MM-DD>: escritório montado pe
 antigas: <modo>. Frentes: <lista>.`
 
 ## Bloco F: a vitrine
+
+### Primeiro, uma coisa feita de verdade
+
+Antes do mapa, faça **uma** tarefa real, ali na frente dele. É o que ele lembra da aula.
+
+- **Conector ligado** (achou uma ferramenta terminada em `semear_prazos`): "Agora uma coisa de
+  verdade: posso buscar os prazos que já estão correndo na sua OAB?" Sim: chame a `semear_prazos`
+  e apresente a resposta **exatamente como as instruções da própria ferramenta mandam** (elas
+  dizem a ordem, o que destacar e como oferecer o calendário). Não resuma por cima, não some
+  número. Ela só roda uma vez a cada 30 dias, então **só no primeiro setup**, nunca no "ajustar
+  um ponto".
+- **Sem Conector:** "Me arraste aqui o PDF de um processo seu e eu te devolvo a linha do tempo."
+  Se ele arrastar, use a skill `ler-processo`. Se não quiser agora, siga.
+
+### Depois, o mapa
 
 Nada de "configurado". Mostre o **mapa do escritório**: uma linha por frente montada, com uma
 tarefa pronta pra testar **agora**, tirada da área dele. Exemplos pra Casos, por área:
@@ -494,7 +599,10 @@ boa e eu escrevo a próxima no mesmo molde"). Depois do mapa, em poucas linhas:
 
 - O perfil está no `AGENTS.md` desta pasta, editável quando ele quiser; a pasta não é repositório
   git, de propósito; `/setup` roda de novo a qualquer momento, sem perder nada.
-- Quando houver: a soma da migração (frase de uma linha), quantos itens estão na `_triagem/`, a
-  oferta de personalização, os campos `<a preencher>`, e a frase do Conector do Bloco 0.
+- Quando houver: a soma da migração (frase de uma linha), o estilo aprendido ("aprendi com <N>
+  peças suas; o resumo está em `_contexto/estilo-de-escrita.md`"), a oferta de marca, os campos
+  `<a preencher>`, e a frase do Conector do Bloco 0.
+- **Triagem com saída:** sobrou coisa na `_triagem/`? Diga quantos e o próximo passo concreto:
+  "quando quiser, me peça *organiza a triagem* e eu proponho o destino de cada bloco, um por vez".
 
 Não liste arquivos um por um, não mostre JSON nem comando pra copiar, a não ser que ele peça.
