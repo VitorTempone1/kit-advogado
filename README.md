@@ -141,6 +141,22 @@ perito.*
 | `/pjecalc-preparo` | Lê a sentença e monta o roteiro de lançamento no PJe-Calc, com prescrição e omissões; confere o relatório do PJe-Calc contra a sentença |
 | `/calculo-previdenciario-basico` | Tempo de contribuição com concomitância e as regras de transição da EC 103/2019: qual já cumpre e quando cumpre. Sem RMI |
 
+**Presença e marketing**
+
+Todas passam o texto pela checagem do Provimento 205/2021 da OAB antes de entregar, e
+usam as cores, as fontes e o logo de `_contexto/marca.md` (se o arquivo não existir, a
+primeira delas pergunta três coisas e grava).
+
+| Skill | O que faz |
+|---|---|
+| `/carrossel-instagram` | A arte do carrossel: um PNG 1080x1350 por slide |
+| `/capa-instagram` | Capa de Reels (1080x1920) ou miniatura do YouTube |
+| `/copy-escritorio` | Bio do Instagram, texto do site, descrição do Google, anúncio |
+| `/site-do-escritorio` | Site de uma página e o passo a passo pra pôr no ar de graça (Netlify) |
+| `/seo-local` | Perfil da Empresa no Google, avaliações dentro da ética, palavras-chave da cidade |
+
+As imagens saem pelo Chrome ou pelo Edge que já estão no computador: nada a instalar.
+
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
 
