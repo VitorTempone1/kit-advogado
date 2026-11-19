@@ -127,6 +127,20 @@ Você não precisa decorar o nome: fale como falaria com um assistente ("faz a f
 `tutorial` escreve passo a passo para você fazer à mão o que não dá para automatizar. As outras
 (`orquestrar`, `instrumentar`) são de bastidor: o próprio sistema usa.
 
+**Cálculos**
+
+O número sai de um programa (Python, na sua máquina), nunca do "palpite" da IA. Cada cálculo vem
+com a memória linha a linha e termina com: *Conferir antes de juntar. Não substitui o PJeCalc nem o
+perito.*
+
+| Chame | O que faz |
+|---|---|
+| `/calculo-rescisao` | Verbas rescisórias por tipo de rescisão (sem justa causa, pedido, justa causa, acordo do art. 484-A): saldo, aviso proporcional com projeção, férias, 13º, FGTS e multa. Sem INSS/IR |
+| `/calculo-horas-extras` | Horas extras a partir da jornada em planilha (CSV): 50%, 100% em domingo e feriado, divisor, reflexos em DSR, 13º, férias + 1/3 e FGTS |
+| `/atualizacao-monetaria` | Corrige valor entre duas datas com índices do Banco Central: um índice só, modo trabalhista (ADC 58/59 + Lei 14.905) ou cível (Lei 14.905). Precisa de internet |
+| `/pjecalc-preparo` | Lê a sentença e monta o roteiro de lançamento no PJe-Calc, com prescrição e omissões; confere o relatório do PJe-Calc contra a sentença |
+| `/calculo-previdenciario-basico` | Tempo de contribuição com concomitância e as regras de transição da EC 103/2019: qual já cumpre e quando cumpre. Sem RMI |
+
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
 
