@@ -26,6 +26,7 @@ data,entrada,saida,intervalo
 - Se o advogado mandar planilha `.xlsx`, peça para salvar como CSV no Excel ("Salvar como" → CSV).
   Se mandar o cartão de ponto em PDF, transcreva os dias para o CSV, **mostre ao advogado as
   primeiras linhas e peça conferência** antes de calcular: erro de transcrição vira erro de valor.
+  **Pare a resposta aí** e espere o "ok": não rode o script na mesma resposta em que transcreveu.
 - Se a jornada é alegada ("trabalhava das 7h às 19h de segunda a sábado"), gere o CSV pela regra
   alegada para o período, e diga na saída que é jornada **alegada**, não comprovada.
 - Grave o CSV na pasta do caso: `clientes/<cliente>/calculos/jornada.csv`.

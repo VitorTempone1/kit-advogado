@@ -22,6 +22,8 @@ inicio,fim,descricao
 - `fim` vazio = vínculo ativo até a DER.
 - Se o advogado mandar o CNIS em PDF, use `/ler-processo` (modo `texto`) para extrair o texto, monte
   o CSV com os períodos e **mostre a tabela ao advogado para conferência antes de calcular**.
+  **Pare a resposta aí** e espere o "ok" (ou a correção): não rode o script na mesma resposta
+  em que transcreveu o CNIS. Erro de transcrição vira data de aposentadoria errada.
   Indicador de pendência no CNIS (PEXT, AEXT-VT, PREC-MENOR-MIN...) não é decidido por você: liste
   o vínculo e pergunte se entra.
 - Grave em `clientes/<cliente>/calculos/vinculos.csv`.

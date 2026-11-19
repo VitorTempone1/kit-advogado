@@ -54,6 +54,11 @@ def main():
     assert "Cartão de Ponto" in r  # tem hora extra
     assert r.count(FALTA) >= 5, "inss, ir, custas, juros, carga horaria nao constam: tinha que apontar"
     assert "**sem página**" in r  # ajuizamento veio sem fonte
+    # o resumo final lista TODA tela que levou FALTA, com o nome da tela (nao a chave do JSON)
+    resumo = r.split("## O que a decisão não disse")[1]
+    for rot in ("Faltas e férias", "Carga horária", "Juros", "Custas", "Imposto de renda", "Jornada"):
+        assert rot in resumo, (rot, resumo)
+    assert "faltas_ferias" not in resumo and "honorarios" not in resumo, resumo
     # bienal: demissao 01/03/2021 com ajuizamento 10/05/2023 -> passou de 10/05/2021
     r2 = roteiro(dict(P, demissao="01/03/2021"))
     assert "Atenção, bienal" in r2, r2

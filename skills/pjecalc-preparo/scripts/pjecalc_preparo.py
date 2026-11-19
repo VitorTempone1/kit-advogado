@@ -140,10 +140,16 @@ def roteiro(p):
           "", "## 12. Liquidar e exportar", "",
           "- [ ] Operações > Liquidar; resolver todo alerta antes de imprimir.",
           "- [ ] Imprimir o relatório completo em PDF e rodar a conferência desta skill contra ele.", ""]
-    faltas = [k for k in ("admissao", "demissao", "ajuizamento", "salario", "correcao", "juros", "fgts", "inss", "ir",
-                          "honorarios", "custas") if campo(p, k)[0] is None]
+    rotulos = [("admissao", "Admissão"), ("demissao", "Demissão"), ("ajuizamento", "Ajuizamento"),
+               ("salario", "Salário"), ("carga_horaria", "Carga horária / divisor"),
+               ("faltas_ferias", "Faltas e férias (tela 3)"), ("fgts", "FGTS"), ("inss", "Contribuição social (INSS)"),
+               ("ir", "Imposto de renda"), ("honorarios", "Honorários"), ("custas", "Custas"),
+               ("correcao", "Correção monetária"), ("juros", "Juros")]
+    if tem_he:
+        rotulos.append(("jornada", "Jornada (cartão de ponto)"))
+    faltas = [r for k, r in rotulos if campo(p, k)[0] is None]  # a mesma lista que leva FALTA no roteiro acima
     o += ["## O que a decisão não disse", ""]
-    o += ["- %s" % k for k in faltas] or ["Nada dos campos principais ficou em branco."]
+    o += ["- %s" % r for r in faltas] or ["Nada dos campos principais ficou em branco."]
     o += ["", RODAPE]
     return "\n".join(o)
 
