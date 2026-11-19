@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- Fontes: troque os nomes pelos de _contexto/marca.md (Google Fonts). Sem internet, cai na fonte reserva. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=block">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<!-- Tipos: class="slide capa", "slide", "slide escuro". Um arquivo por slide: 01.html, 02.html... -->
+<main class="slide capa">
+  <h1>Título do slide</h1>
+  <p>Corpo curto, até três linhas.</p>
+  <div class="marca"><!-- <img src="logo.png" alt=""> --><span>Nome do Escritório · OAB/UF 000.000</span></div>
+  <div class="contador">1/8</div>
+</main>
+<script>
+addEventListener("load", () => {
+  const s = document.querySelector(".slide");
+  if (s.scrollHeight > s.clientHeight + 1 || document.documentElement.scrollWidth > 1080)
+    document.body.insertAdjacentHTML("beforeend", '<div class="estourou">TEXTO NÃO COUBE: encurte este slide</div>');
+});
+</script>
+</body>
+</html>

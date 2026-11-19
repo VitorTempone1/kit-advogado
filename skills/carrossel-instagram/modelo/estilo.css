@@ -1,0 +1,48 @@
+/* Copie para a pasta do carrossel e troque SÓ as variáveis do :root pelos valores
+   de _contexto/marca.md. O resto é o desenho, igual em todo slide. */
+:root {
+  --fundo: #F6F4EF;        /* fundo do slide */
+  --texto: #1B1F27;        /* letra: contraste alto com o fundo */
+  --principal: #1F3A5F;    /* cor principal da marca: títulos, faixa */
+  --destaque: #B08D57;     /* cor de destaque: detalhes pequenos, nunca texto longo */
+  --fonte-titulo: "Playfair Display", Georgia, serif;
+  --fonte-texto: "Inter", "Segoe UI", Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; background: var(--fundo); }
+.slide {
+  width: 1080px; height: 1350px; overflow: hidden; position: relative;
+  padding: 120px 96px 150px; display: flex; flex-direction: column; justify-content: center;
+  color: var(--texto); font-family: var(--fonte-texto); font-size: 46px; line-height: 1.4;
+}
+.slide::before { /* faixa da marca no topo */
+  content: ""; position: absolute; left: 96px; top: 72px; width: 96px; height: 8px; background: var(--destaque);
+}
+.marca { position: absolute; left: 96px; bottom: 64px; display: flex; align-items: center; gap: 20px;
+  font-size: 26px; color: var(--texto); opacity: .8; }
+.marca img { height: 56px; width: auto; }
+.contador { position: absolute; right: 96px; bottom: 64px; font-size: 26px; color: var(--texto); opacity: .6;
+  font-variant-numeric: tabular-nums; }
+h1, h2 { font-family: var(--fonte-titulo); color: var(--principal); line-height: 1.12; letter-spacing: -0.01em;
+  text-wrap: balance; }
+h1 { font-size: 96px; margin-bottom: 40px; }
+h2 { font-size: 72px; margin-bottom: 36px; }
+p + p { margin-top: 24px; }
+strong { color: var(--principal); }
+/* Capa: título grande, sem corpo longo */
+.capa h1 { font-size: 104px; }
+.capa p { font-size: 44px; max-width: 820px; }
+/* Slide de lista: até 4 itens curtos */
+ul { list-style: none; }
+li { padding-left: 44px; position: relative; }
+li + li { margin-top: 22px; }
+li::before { content: ""; position: absolute; left: 0; top: .55em; width: 18px; height: 18px; background: var(--destaque); }
+/* Ressalva (slide de limite) */
+.ressalva { border-top: 4px solid var(--destaque); padding-top: 28px; font-size: 42px; }
+/* Fundo escuro opcional (capa ou fecho) */
+.escuro { background: var(--principal); }
+.escuro, .escuro .marca, .escuro .contador { color: #fff; }
+.escuro h1, .escuro h2, .escuro strong { color: #fff; }
+/* Aviso de texto que não coube: aparece no PNG, impossível não ver */
+.estourou { position: fixed; inset: 0 0 auto 0; background: #D00; color: #fff; font: 700 40px Arial;
+  padding: 24px; text-align: center; z-index: 9; }
