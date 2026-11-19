@@ -102,6 +102,17 @@ Você não precisa decorar o nome: fale como falaria com um assistente ("faz a f
 |---|---|
 | `redacao-juridica` | O padrão de escrita de toda peça: petição, recurso, manifestação, parecer |
 | `pacote-protocolo` | Monta a pasta de protocolo com os anexos numerados na ordem de envio e nomes que o tribunal aceita |
+| `revisar-peca` | Revisa uma minuta pela régua de redação e devolve um relatório único |
+| `analise-de-decisao` | Decisão, sentença ou acórdão: o que decidiu, saldo, recurso cabível e prazo pelo Conector |
+
+**Contratos e LGPD**
+
+| Skill | O que faz |
+|---|---|
+| `revisar-contrato` | Marca as cláusulas de risco para o lado do seu cliente e sugere redação |
+| `notificacao-extrajudicial` | Redige a notificação ou a resposta a uma notificação recebida |
+| `lgpd-escritorio` | Adequação do seu escritório à LGPD: inventário, bases legais, política, incidente, encarregado |
+| `lgpd-consultivo` | Diagnóstico LGPD de cliente empresa, com lacunas e prioridade |
 
 **Escrita, organização e conteúdo**
 
