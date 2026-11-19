@@ -47,6 +47,9 @@ não coleta dado pessoal e não precisa de aviso de cookies), Google Analytics o
 
 Um `index.html` com o CSS dentro de `<style>`. Imagens (logo, foto) na mesma pasta,
 com nome simples (`logo.png`, `foto.jpg`). Nada de framework nem script de terceiros.
+Mapa: só o link "Ver no Google Maps" (`https://www.google.com/maps/search/?api=1&query=<endereço>`),
+nunca `<iframe>` do Maps: o mapa embutido é script de terceiro, grava cookie do Google no
+visitante (aí o site passa a precisar de aviso de cookies) e não aparece no print da seção 4.
 
 Princípios de qualidade visual (escritos pra este kit, a partir de boas práticas de
 design de interface):
@@ -108,8 +111,10 @@ Pra o Google (ver também a skill `seo-local`):
 
    Abra os dois `index.png` e confira: nada cortado ou saindo da tela no celular, botão
    visível na primeira tela, texto legível, contraste bom, imagens carregadas. Página
-   mais comprida que 3200 px: aumente a altura. Corrigiu, copie e gere de novo. No fim,
-   apague `marketing/site-prints`.
+   mais comprida que 3200 px: aumente a altura. Corrigiu, copie e gere de novo. O print de
+   celular sai com 500 px de largura (o Chrome não abre janela menor): a página fica nos 390 px
+   da esquerda e o resto é faixa cinza, não defeito. `marketing/site-prints` pode ficar: está
+   fora de `site` e não sobe pro ar.
 3. Abra o `index.html` no navegador do advogado (dois cliques no arquivo) e peça pra ele
    olhar também.
 

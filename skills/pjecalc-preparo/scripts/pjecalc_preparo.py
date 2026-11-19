@@ -135,8 +135,10 @@ def roteiro(p):
           "", "## 10. Custas Judiciais", "", "- [ ] %s" % mostra(p, "custas"),
           "", "## 11. Correção, Juros e Multa", "", "- [ ] Correção: %s" % mostra(p, "correcao"),
           "- [ ] Juros: %s" % mostra(p, "juros"),
-          "- [ ] Se a decisão é de antes de 30/08/2024 e não tratou da Lei 14.905/2024: o TST (SDI-1, "
-          "E-ED-RR-713-03.2010.5.04.0029) manda IPCA + taxa legal a partir de 30/08/2024. Conferir a versão do PJe-Calc.",
+          "- [ ] Lei 14.905/2024 (vigência 30/08/2024): se a decisão não tratou dela, o TST (SDI-1, "
+          "E-ED-RR-713-03.2010.5.04.0029) manda IPCA + taxa legal a partir de 30/08/2024. Vale para decisão anterior "
+          "a essa data; se a decisão é posterior e fixou só SELIC sem falar da lei, seguir o título ou aplicar o marco "
+          "é decisão do advogado. Conferir a versão do PJe-Calc.",
           "", "## 12. Liquidar e exportar", "",
           "- [ ] Operações > Liquidar; resolver todo alerta antes de imprimir.",
           "- [ ] Imprimir o relatório completo em PDF e rodar a conferência desta skill contra ele.", ""]
