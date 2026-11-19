@@ -81,6 +81,26 @@ JurisLabs/               a pasta do seu escritório. O Claude abre AQUI
 
 Quem monta tudo que está fora da `.claude` é o `/setup`, com você.
 
+### As skills
+
+Você pode chamar pelo nome (`/revisar-contrato`) ou só pedir em português ("revisa esse
+contrato"): o Claude reconhece a skill pelo pedido.
+
+| Skill | O que faz |
+|---|---|
+| `escritorio` | Abre a pasta do cliente, mantém o briefing e chama os três advogados de IA |
+| `ler-processo` | Lê o PDF dos autos e devolve a linha do tempo, com a página de cada fato |
+| `redacao-juridica` | O padrão de redação de toda peça |
+| `revisar-peca` | Revisa uma minuta pela régua de redação e devolve um relatório único |
+| `analise-de-decisao` | Decisão, sentença ou acórdão: o que decidiu, saldo, recurso cabível e prazo pelo Conector |
+| `revisar-contrato` | Marca as cláusulas de risco para o lado do seu cliente e sugere redação |
+| `notificacao-extrajudicial` | Redige a notificação ou a resposta a uma notificação recebida |
+| `lgpd-escritorio` | Adequação do seu escritório à LGPD: inventário, bases legais, política, incidente, encarregado |
+| `lgpd-consultivo` | Diagnóstico LGPD de cliente empresa, com lacunas e prioridade |
+| `transcrever-video` | Transcreve reunião, audiência ou áudio na sua máquina |
+| `legendas-youtube` | Pega a legenda de um vídeo do YouTube |
+| `post-instagram` | Do tema ao post do escritório, com a checagem do Provimento 205/2021 |
+
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
 
