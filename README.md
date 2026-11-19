@@ -71,7 +71,7 @@ JurisLabs/               a pasta do seu escritório. O Claude abre AQUI
 │   ├── CLAUDE.md        as regras do sistema
 │   ├── commands/        /setup e /iniciar
 │   ├── skills/          o que o sistema sabe fazer
-│   └── agents/          os três advogados de IA
+│   └── agents/          os dez advogados de IA
 ├── _contexto/           quem é o escritório, o mapa das pastas, estilo de escrita, marca
 ├── _memoria/            as decisões, com data
 ├── _triagem/            o que a migração não soube classificar
@@ -156,6 +156,27 @@ primeira delas pergunta três coisas e grava).
 | `/seo-local` | Perfil da Empresa no Google, avaliações dentro da ética, palavras-chave da cidade |
 
 As imagens saem pelo Chrome ou pelo Edge que já estão no computador: nada a instalar.
+
+### Os advogados de IA (agentes)
+
+Cada um trabalha na pasta do caso e grava o resultado lá. Peça pelo que você quer, e o Claude
+chama o agente certo.
+
+| Agente | Peça assim | Entrega em |
+|---|---|---|
+| `pesquisa-juridica` | "Tem tese pra isso? Acha jurisprudência." | `pesquisa/` |
+| `parte-contraria` | "Onde eu tô fraco? O que o outro lado vai fazer?" | `contraditorio/` |
+| `head-juridico` | "E agora? Monta a estratégia do caso." | `estrategia/` |
+| `viabilidade` | "Vale a pena entrar com esse caso?" | `estrategia/` |
+| `pesquisa-stf` | "O que o STF diz sobre isso? Tem tema de repercussão geral?" | `pesquisa/` |
+| `pesquisa-stj` | "Tem repetitivo ou súmula do STJ sobre isso?" | `pesquisa/` |
+| `prescricao` | "Já prescreveu? Até quando posso entrar?" | `estrategia/` |
+| `audiencia` | "Me prepara pra audiência de amanhã." | `estrategia/` |
+| `acordo` | "O outro lado ofereceu X. Quanto eu aceito?" | `estrategia/` |
+| `conferir-citacoes` | "Confere se os julgados dessa peça existem." | `revisao/` |
+
+Todos seguem a mesma regra: só citam o que buscaram na hora, com link, e marcam
+`[não verificado]` o que não conseguiram conferir.
 
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
