@@ -110,6 +110,17 @@ Ordem certa, sempre: **pesquisa → contrária → head**. Pular etapa estraga o
 | `parte-contraria` | depois que há pesquisa; antes de qualquer peça | `contraditorio/` |
 | `head-juridico` | depois dos dois; para peça, audiência ou decisão | `estrategia/` |
 
+Sob demanda, fora da ordem acima (rode quando o advogado pedir):
+
+| Agente | Quando | Entrega em |
+|---|---|---|
+| `viabilidade` | "vale a pena entrar?", antes de aceitar o caso | `estrategia/` |
+| `prescricao` | "já prescreveu?", "até quando posso entrar?" | `estrategia/` |
+| `pesquisa-stf` / `pesquisa-stj` | precedente vinculante dos tribunais superiores | `pesquisa/` |
+| `audiencia` | audiência marcada | `estrategia/` |
+| `acordo` | proposta recebida ou a fazer | `estrategia/` |
+| `conferir-citacoes` | antes de protocolar qualquer peça com citação | `revisao/` |
+
 Ao despachar, passe no prompt: caminho completo da pasta do caso, o que já foi
 lido, e a pergunta jurídica específica. Agente sem pergunta específica devolve
 lugar-comum.

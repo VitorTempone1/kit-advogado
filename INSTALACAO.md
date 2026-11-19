@@ -39,7 +39,7 @@ que termina com uma sequência de letras e números. Esse endereço é a sua cha
 compartilhe**. Se vazar, avise, que a gente cancela e gera outro.
 
 O que funciona **sem** o Conector: organizar a pasta do cliente, manter o briefing do caso, ler
-PDF de processo e montar a linha do tempo, redigir e revisar minuta, os três advogados de IA
+PDF de processo e montar a linha do tempo, redigir e revisar minuta, os advogados de IA
 raciocinando em cima do que você já tem.
 
 O que **não** funciona sem ele: buscar intimação nova no Diário, consultar andamento de processo,
