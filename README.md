@@ -81,6 +81,41 @@ JurisLabs/               a pasta do seu escritório. O Claude abre AQUI
 
 Quem monta tudo que está fora da `.claude` é o `/setup`, com você.
 
+### As skills
+
+Você não precisa decorar o nome: fale como falaria com um assistente ("faz a ficha da Maria",
+"avisa o cliente da sentença") e o Claude chama a skill certa. Se preferir, digite `/nome`.
+
+**Casos e clientes**
+
+| Skill | O que faz |
+|---|---|
+| `escritorio` | Abre a pasta do cliente, mantém o `briefing.md` do caso e coloca os três advogados de IA para trabalhar |
+| `ficha-de-atendimento` | A reunião com o cliente vira a ficha do caso no briefing, com a lista de documentos para pedir |
+| `kit-contratacao` | Procuração, contrato de honorários e declaração de hipossuficiência em Word, com o que falta marcado `[PREENCHER]` |
+| `avisar-cliente` | Decisão, sentença ou intimação vira mensagem curta e leiga para o cliente, pronta para o WhatsApp |
+| `ler-processo` | Lê o PDF do processo e devolve a linha do tempo, os pedidos e as decisões |
+
+**Peças e protocolo**
+
+| Skill | O que faz |
+|---|---|
+| `redacao-juridica` | O padrão de escrita de toda peça: petição, recurso, manifestação, parecer |
+| `pacote-protocolo` | Monta a pasta de protocolo com os anexos numerados na ordem de envio e nomes que o tribunal aceita |
+
+**Escrita, organização e conteúdo**
+
+| Skill | O que faz |
+|---|---|
+| `escrita-clara` | Tira a cara de IA de e-mail, mensagem e post |
+| `organizar-pasta` | Arruma pasta bagunçada sem apagar nada, com registro para desfazer |
+| `post-instagram` | Da pauta ao post, com a checagem do Provimento 205/2021 da OAB |
+| `transcrever-video` | Transcreve reunião, áudio e vídeo na sua própria máquina |
+| `legendas-youtube` | Pega a legenda de um vídeo do YouTube sem baixar o vídeo |
+
+`tutorial` escreve passo a passo para você fazer à mão o que não dá para automatizar. As outras
+(`orquestrar`, `instrumentar`) são de bastidor: o próprio sistema usa.
+
 O cálculo de prazo não está aqui: ele vem do **Conector DJEN**, que guarda no servidor os
 calendários de feriado dos 27 tribunais e fica sempre atual. O Passo 10 do INSTALACAO.md liga.
 
