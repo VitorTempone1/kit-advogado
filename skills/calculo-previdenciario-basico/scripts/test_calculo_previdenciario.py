@@ -40,6 +40,10 @@ def main():
     assert regra(r, "Pedágio de 100%") == ("JÁ CUMPRE", date(2025, 1, 1)), regra(r, "Pedágio de 100%")
     assert regra(r, "Idade progressiva")[1] == date(2030, 1, 1), regra(r, "Idade progressiva")
     assert regra(r, "Pontos")[0] != "JÁ CUMPRE"  # 60 + 38,03 = 98,03 < 102 (2025)
+    # pontos (homem, 96 em 2019, +1/ano): 2027 pede 104. Em 01/01/2027+k: idade 62 + k/365,
+    #   TC (13.880 + 730 + k)/365 -> 62 + (14.610 + 2k)/365 >= 104 -> k >= 360 -> 27/12/2027
+    #   (2026 pede 103: k >= 542,5, nao cabe no ano)
+    assert regra(r, "Pontos")[1] == date(2027, 12, 27), regra(r, "Pontos")
 
     # --- Caso 2: mulher, concomitancia, pedagio 50% e pontos -------------
     # nasc. 10/05/1968; DER 01/07/2025
